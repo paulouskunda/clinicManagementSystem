@@ -3,7 +3,7 @@
 //Obtain the connection 
 require_once '../includeFiles/Connection.php';
 
-$SQL = "SELECT patients.fullname, labtech.id, labtech.aID, staff.staffName, patients.uniqueID FROM labtech, staff, patients WHERE labtech.coID = staff.staffNumber AND labtech.pUniqueID = patients.uniqueID AND status = 'labTech'";
+$SQL = "SELECT patients.fullname, labtech.id, labtech.aID, staff.staffName, patients.uniqueID, labtech.testFor FROM labtech, staff, patients WHERE labtech.coID = staff.staffNumber AND labtech.pUniqueID = patients.uniqueID AND status = 'labTech'";
 $query = mysqli_query($con, $SQL);
 
 

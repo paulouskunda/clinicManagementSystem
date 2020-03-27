@@ -140,6 +140,30 @@
                             <textarea rows="6" class="form-control" name="coFindings" placeholder="What the clinical officer found from the patient"><?php echo $coFind; ?></textarea>
                         </div>
                         &nbsp;
+                        <?php
+
+                            $labSQL = "SELECT labTech.testFor FROM labTech, activelog  WHERE labTech.aID = activelog.id ";
+                            if ($resultsLab = mysqli_query($con, $labSQL)) {
+                                # code...
+                                while ($rowsQu = mysqli_fetch_assoc($resultsLab)) {
+                                    # code...
+                                    echo '
+                                        <div class="col-md-12">
+                                        <label>Lab Test for <sub>(only feel this field if the patient is to be sent to the lab)</sub></label>
+                                        <input type="text" value="'.$rowsQu['testFor'].'" class="form-control" placeholder="Test the Patient for" name="testFor" readonly>
+                                         </div><br>';
+                                }
+
+                                echo '
+                                    <div class="col-md-12">
+                                    <label>Lab Test for <sub>(only feel this field if the patient is to be sent to the lab)</sub></label>
+                                    <input type="text" class="form-control" placeholder="Test the Patient for" name="testFor">
+                                     </div><br>';
+                           
+                            }else {
+                             }      
+                        ?>
+
                         <div class="col-md-12">
 
 
@@ -217,7 +241,7 @@
                                         <td>Disease Record</td>
                                         <td>Clinical Officer</td>
                                         <td>Referral</td>
-                                        <td>View Details</td>
+                                        <!-- <td>View Details</td> -->
                                     </thead>
                                     <tbody>
                                         <?php
@@ -229,14 +253,14 @@
                                                         <td>'.$rowP['diseaseName'].'</td>
                                                         <td>'.$rowP['staffName'].'</td>
                                                         <td>No</td>
-                                                        <td><button>View</button></td>
+                                                        
                                                     </tr>';
                                                 }
                                             }else{
                                                 echo mysqli_error($con);
                                             }
                                         ?>
-
+<!-- <td><button>View</button></td> -->
                                     </tbody>
                                 </table>
                             </div>
