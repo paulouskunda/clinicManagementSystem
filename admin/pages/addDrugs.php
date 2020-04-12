@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<?php
+require '../../includeFiles/Connection.php';
+
+?>
+    <!DOCTYPE html>
 <html lang="en">
 
  
@@ -162,11 +166,17 @@
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="card">
                                 <h5 class="card-header">Add Drugs</h5>
+                                <?php
+                                    if(isset($_SESSION['messageAddDrug'])){
+                                        echo '<div class="alert alert-sucess">'.$_SESSION['messageAddDrug'].'</div>';
+                                        unset($_SESSION['messageAddDrug']);
+                                    }
+                                ?>
                                 <div class="card-body">
                                     <form class="form-group" action="filesAdded.php" method="POST">
                                         <div class="col-sm-12">
                                             <label>Drug Name</label>
-                                            <input type="text" name="drugsName" placeholder="First-Name" class="form-control">
+                                            <input type="text" name="drugsName" placeholder="Drug name" class="form-control">
 
                                         </div>
                                        

@@ -102,7 +102,9 @@
                 ?>
                 <div class="col-md-12" >
                     <div class="col-md-6" style="float: left;">
-                        <form action="" method="">
+                        <form action="createRef.php" method="GET">
+                              <input type="text" name="pID" value="<?php echo $pID; ?>" hidden="">
+                            <input type="text" name="aID" value="<?php echo $activeID; ?>" hidden="">
                             Give Patient a referal letter? <button class="btn btn-success">Print Referal Letter</button>
                         </form>
                     </div>
@@ -137,11 +139,21 @@
                         <input type="text" class="form-control" placeholder="Possible disease" name="possibleDisease">
                     </div><br>
                     <div class="col-md-12">
+                        <?php 
+                            $sqlDrugs = "SELECT * FROM drugs";
+                            $result = mysqli_query($con, $sqlDrugs);
+                        
+                            
+                        ?>
                         <h3>Pick the drugs</h3>
                         <select id="getDrugID" class="form-control" onchange="accountSelect(this)">
-                            <option value="select">~Select~</option>
-                            <option value="Paracitamo">Paracitamo</option>
-                            <option value="Caffino">Caffino</option>
+                            <?php
+                                
+                            while($rows = mysqli_fetch_assoc($result)){
+                                echo '<option value="'.$rows['drugName'].'">'.$rows['drugName'].'</option>';
+                            }
+                            ?>
+               
                         </select>
 
                         <br>

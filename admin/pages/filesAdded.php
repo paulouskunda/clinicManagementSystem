@@ -93,13 +93,13 @@ if (isset($_POST['patientSubmit'])) {
 	# code...
 	$drugsName = mysqli_real_escape_string($con, $_POST['drugsName']);
 
-	$sqlDrugs = "INSERT INTO drugs (drugName) VALUES ('$drugsName')";
+	$sqlDrugs = "INSERT INTO drugs (drugName,addBy) VALUES ('$drugsName','admin')";
 
 	if (RunMysqliQuery($con, $sqlDrugs)) {
 		# code...
 		echo "It Worked";
-		$_SESSION['message'] = "Drug was added successfully";
-		header("location: addDrugs");
+		$_SESSION['messageAddDrug'] = "Drug was added successfully";
+		header("location: addDrugs.php");
 	}else {
 		echo "Nah";
 	}

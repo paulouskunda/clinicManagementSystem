@@ -280,9 +280,6 @@ John Abraham</span>is now following you
 
                             //Search for diseases
 
-                            $sqlDiseases = "SELECT diseaseName FROM diseaserecord";
-                            $queryDisease = mysqli_query($con, $sqlDiseases);
-                            $numDiseases = mysqli_num_rows($queryDisease);
 
                         ?>
 
@@ -316,7 +313,6 @@ John Abraham</span>is now following you
                                                 <option value="allPatients">Patients</option>
                                                 <option value="allStaff">Staff List</option>
                                                 <option value="diseaseBased">Disease Based</option>
-                                                <option value="singleStaff">Single Staff Report</option>
                                                 <option value="singlePatient">Single Patient Report</option>
                                                 <option value="ageGroup">Age Group</option>
                                                 <option value="genderReport">Gender Based</option>
@@ -348,33 +344,36 @@ John Abraham</span>is now following you
 
 
 
-                                        </div>
-                                         <div class="form-group" id="hidden_div_diseaseBased" style="display: none;">
+                                        </div>         
+                                    <div class="form-group" id="hidden_div_diseaseBased" style="display: none;">
                                              <!--    <select class="form-control">
                                                     <option>Emails Here</option>
                                                 </select> -->
-                                            
-                                            <?php 
-                                              // if ($numDiseases > 0) {
-                                                    # code...
-                                                    ?>
-                                                    <!-- <div class="form-group"> -->
-                                                    <label for="cc-email" class="control-label mb-1">Disease Name</label>
-                                                    <select class="form-control" name="diseaseName" data-live-search="true">
-                                                    <?php
+                                                
+                                              <label class="control-label mb-1">Disease Record</label><br>
+                                            <select class="form-control" name="selectedGender">
+                                                <?php
 
-                                                        # code...
-                                                         while($rowQuery = mysqli_fetch_assoc($QueryAccount)) {
-                                                            echo "<option value=".$rowQuery['uniqueID'].">".$rowQuery['uniqueID']." ".$rowQuery['fullname']."</option>";
-                                                        }
-                                                    // } 
-                                                ?> 
-                                                    </select>
+                                                    $sqlDiseases = "SELECT diseaseName FROM diseaserecord";
+                                                    $queryDisease = mysqli_query($con, $sqlDiseases);
+                                                    $numDiseases = mysqli_num_rows($queryDisease);
+                                                 
+                                                    
+                                                if($numDiseases > 0 ){
+                                                 while($innerRow = mysqli_fetch_assoc($queryDisease)){
+                                                    echo '<option value="'.$innerRow['diseaseName'].'">'.$innerRow['diseaseName'].'</option>';
+                                                    }
+                                                }else {
+                                                    echo '<option value="Nothing">Nothing</option>';
+                                                }
+                                                
+                                                ?>
+                                            </select>
 
 
 
                                         </div>
-
+                                       
                                         <div class="form-group" id="hidden_date" style="display: none;">
                                             <label class="control-label mb-1">Enter Lowest Age</label><br>
                                             <label class="control-label mb-1">From </label>
@@ -454,12 +453,18 @@ John Abraham</span>is now following you
             // document.getElementById('hidden_div');
             if (select.value == 'singlePatient') {
                     document.getElementById('hidden_div').style.display = "block";
+                    document.getElementById('hidden_gender').style.display = "none";
+                document.getElementById('hidden_date').style.display = "none";
+
                     <?php
                         $whoCalledMe = "singlePatient";
                     ?>
             } else if (select.value == 'diseaseBased') {
                     document.getElementById('hidden_div_diseaseBased').style.display = "block";
                     document.getElementById('hidden_div').style.display = "none";
+                    document.getElementById('hidden_gender').style.display = "none";
+                document.getElementById('hidden_date').style.display = "none";
+
 
                     <?php
                         $whoCalledMe = "diseaseBased";

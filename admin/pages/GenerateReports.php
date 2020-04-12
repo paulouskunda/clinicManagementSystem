@@ -296,7 +296,7 @@ $title = 'SUNBI CLINIC';
 					$pdf->Cell(40,5,''.$getStaff['cpTimeEnded'],1,1,'L');//end of line
 				}
 			} else {
-				$pdf->Cell(270,5,'No data avaliable right now',1,1,L);
+				$pdf->Cell(270,5,'No data avaliable right now',1,1,'L');
 			}
 
 
@@ -379,7 +379,7 @@ $title = 'SUNBI CLINIC';
 					$pdf->Cell(40,5,''.$getAGPatient['dateRegistered'],1,1,'L');//end of line
 				}
 			} else {
-				$pdf->Cell(270,5,'No data avaliable right now',1,1,L);
+				$pdf->Cell(280,5,'No data avaliable right now',1,1,'L');
 			}
 
 
@@ -462,7 +462,7 @@ $title = 'SUNBI CLINIC';
 					$pdf->Cell(40,5,''.$getAGPatient['dateRegistered'],1,1,'L');//end of line
 				}
 			} else {
-				$pdf->Cell(270,5,'No data avaliable right now',1,1,L);
+				$pdf->Cell(280,5,'No data avaliable right now',1,1,'L');
 			}
 
 
@@ -471,8 +471,10 @@ $title = 'SUNBI CLINIC';
 			//Numbers are right-aligned so we give 'R' after new line parameter
 			$pdf->Output();
 
- } else if($getParam == ""){
-     
+ } else if($getParam == "selectDisease"){
+      	# code...
+
+ 	echo "Yes it works";
  }
 
 ?>

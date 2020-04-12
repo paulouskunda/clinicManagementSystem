@@ -19,11 +19,16 @@ $query = mysqli_query($con, $SQL);
 
 	<!-- Align on the center -->
 	<div class="container">
-		<?php
-		//create a session 
-		
-		?>
+		       <?php
 
+                    if (isset($_SESSION['redirectMessage'])) {
+                        # code...
+                        echo '<p class="alert alert-success d-flex flex-row"> '.$_SESSION['redirectMessage'].'<span id="count">10</span> seconds...</p>';
+                        unset($_SESSION['redirectMessage']);
+                        header('Refresh: 5; URL=index.php');
+                    }
+
+                ?>
 		<div class="row">
 			<h2 style="text-align: center;">WELCOME NAME OF THE SUNBI CLINIC</h2>
 			<table class="table">

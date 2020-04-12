@@ -177,7 +177,7 @@
                     $runQuery = mysqli_query($con, $SQL);
                     $countDisease = '';
                     $diseaseName = '';
-                    $
+                    
                     while ($rows = mysqli_fetch_assoc($runQuery)) {
                         # code...
                         $countDisease = $rows['Diseases'];

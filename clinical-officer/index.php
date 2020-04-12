@@ -35,6 +35,8 @@ $query = mysqli_query($con, $sql);
 	<!-- Align on the center -->
 	<div class="container">
 		<div class="row">
+<!--            <div class="col-md-8">-->
+         
 			<?php
 
 				if ($isDefault == 0) {
@@ -42,7 +44,12 @@ $query = mysqli_query($con, $sql);
 					echo "<h3 class='alert alert-info'> We recommend you change your default password in <a href='../views/Settings.php'>settings</a>.</h3>";
 				}
 
-			?>
+			?>  
+             <a href="../logout.php" >Logout</a> 
+          
+<!--               </div>-->
+         
+            <div class="col-md-12">
 			<h2 style="text-align: center;">WELCOME<strong> <?php echo $FullName; ?> </strong></h2>
 			<table class="table">
 				<thead style="font-style: bond;">
@@ -90,7 +97,7 @@ $query = mysqli_query($con, $sql);
 
 
 			?>
-			<h3>Waiting for the Lab Results</h3>
+			<h3>Patient From the Lab with  Results</h3>
 			<table class="table">
 				<thead style="font-style: bond;">
 				
@@ -139,6 +146,7 @@ $query = mysqli_query($con, $sql);
 			</table>
 			<br><br>
 		</div>
-	</div>
+    
+<!--	</div>-->
 </body>
 </html>

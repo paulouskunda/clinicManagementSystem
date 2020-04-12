@@ -4,6 +4,8 @@
 
 	// $_SESSION['labtech'] = "LT1234";
 
+//    $get
+
 	if (isset($_POST['labTestSubmit'])) {
 		# code...
 		$labDetails = mysqli_real_escape_string($con, $_POST['labDetails']);
@@ -26,8 +28,8 @@
 			
 			if (mysqli_query($con, $updateActivityLog)) {
 				# code...
-				echo "It worked";
-			} else {
+                $_SESSION['redirectMessage'] = "The Patient records have been sent to the lab <br> This page will be redirected in 	";			
+            } else {
 				echo " "+mysqli_error($con);
 			}
 
@@ -51,7 +53,16 @@
 			<br><h4 style="text-align: center">Here the Patient Id will be displayed </h4>
 			<hr>
 		
+            <?php
 
+                    if (isset($_SESSION['redirectMessage'])) {
+                        # code...
+                        echo '<p class="alert alert-success d-flex flex-row"> '.$_SESSION['redirectMessage'].'<span id="count">5</span> seconds...</p>';
+                        unset($_SESSION['redirectMessage']);
+                        header('Refresh: 5; URL=index.php');
+                    }
+
+                ?>
 			<form class="form-group" action="" method="POST">
 				<div class="col-md-12">
 					
@@ -68,5 +79,31 @@
 	
 		</div>
 	</div>
+    
+<script type="text/javascript">
+
+window.onload = function(){
+
+(function(){
+  var counter = 5;
+
+  setInterval(function() {
+    counter--;
+    if (counter >= 0) {
+      span = document.getElementById("count");
+      span.innerHTML = counter;
+    }
+    // Display 'counter' wherever you want to display it.
+    if (counter === 0) {
+    //    alert('this is where it happens');
+        clearInterval(counter);
+    }
+
+  }, 1000);
+
+})();
+
+}
+</script>
 </body>
 </html>

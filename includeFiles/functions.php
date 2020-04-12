@@ -6,9 +6,9 @@ function getNewID($letter,$tableName){
 	/**
 	* @author Paul and Kasolo
 	* @since 29/02/2020
-	*  This is a simple method to update the id automatically passed on the previous ID.  
+	*  This is a simple method to update the id automatically based on the previous total count.  
 	*  The function gets the total count of students and adds a one to it then adds the rest of the known parameters
-	*  <code>echo $newId; </code>
+	*  @param for this function are the table to used and letter to be infront of the new id
 	*/
 
 	require 'Connection.php';
