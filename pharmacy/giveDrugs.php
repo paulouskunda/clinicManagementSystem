@@ -39,7 +39,10 @@ while ( $row = mysqli_fetch_assoc($runQuery)) {
 if(isset($_POST['finish'])){
     $aID = $_POST['aid'];
     $dpID = $_POST['dpID']; 
-    $updateActivity = "UPDATE activelog SET activeStatus = 'done' WHERE id = '$aID'";
+    $timeStampedEnded = date("h:i:sa");
+    $pharmacistNumber = $_SESSION['pharmacist'];
+
+    $updateActivity = "UPDATE activelog SET activeStatus = 'done', cpTimeEnded = '$timeStampedEnded', pharmacistID = '$pharmacistNumber' WHERE id = '$aID'";
     if(mysqli_query($con, $updateActivity)){
         $updateDrugs = "UPDATE drugsprescription SET status = 'done' WHERE id = '$dpID'";
         if(mysqli_query($con, $updateDrugs)){

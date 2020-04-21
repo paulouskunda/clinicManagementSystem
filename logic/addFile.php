@@ -36,6 +36,7 @@ if (isset($_POST['patientSubmit'])) {
     if(mysqli_num_rows($mysqlResult) == 1){
         echo 'User is a user';
         $_SESSION['message'] = 'Patient with the provided NRC is already in the system '.$nrc;
+        header("location: ../staff");
     }else {
         $age = date('Y-m-d') - $dob;
 
@@ -49,6 +50,7 @@ if (isset($_POST['patientSubmit'])) {
 	} else {
 		echo "Error: "+mysqli_error($con);
         $_SESSION['message'] = 'We encounter some errors';
+        header("location: ../staff");
 
 	}
     }
@@ -95,16 +97,22 @@ if (isset($_POST['patientSubmit'])) {
     $mysqlResult = mysqli_query($con, $selectQuery);
     if(mysqli_num_rows($mysqlResult) == 1){
         echo 'Staff entered is already a staff';
-        $_SESSION['message'] = 'Staff Already exisits with'.$nrc;
+        $_SESSION['errorMessage'] = 'Staff Already exisits with the same NRC "'.$nrc.'"';
+        header('location: ../admin/pages/addStaff.php');
     }else {
 
         $sql = "INSERT INTO staff(staffName,staffNumber,staffAddress, staffTitle, staffEmail,nrc,staffDOB,password,dateRegistered) VALUES ('$fullName','$staffNumber','$address','$title','$email','$nrc','$dob','1234','$timestamp')";
 
         if (RunMysqliQuery($con, $sql)) {
             # code...
+            $_SESSION['addStaff'] = "".$firstName." was successfully added";
             echo "It worked";
+            header('location: ../admin/pages/addStaff.php');
+
         } else {
-            echo "Nah";
+             $_SESSION['errorMessage'] = "An error was encountered, try again later";
+             header('location: ../admin/pages/addStaff.php');
+
         }
         
     }

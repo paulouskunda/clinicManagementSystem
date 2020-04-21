@@ -169,7 +169,7 @@ $title = 'SUNBI CLINIC';
 				$pdf->Cell(60 ,5,'Patient Name',1,0);
 				$pdf->Cell(35,5,'Patient Number',1,0);
 				$pdf->Cell(50 ,5,'Staff Name',1,0);
-				$pdf->Cell(50 ,5,'Disease Name',1,0);//end of line
+				$pdf->Cell(50 ,5,'Diagnosis',1,0);//end of line
 				$pdf->Cell(40,5,'CP Time Started ',1,0);
 				$pdf->Cell(40,5,'CP Time Ended',1,1);
 			
@@ -212,7 +212,7 @@ $title = 'SUNBI CLINIC';
  } else if ($getParam == 'singlePatient'){
  	$getID = $_POST['pUniqueID'];
 
- 	$Explo = explode(" ", $getID);
+ 	$Explo = explode(",", $getID);
 
  	$namePassed = "";
  			for ($i=0; $i < count($Explo) ; $i++) { 
@@ -225,7 +225,7 @@ $title = 'SUNBI CLINIC';
  				$namePassed .= $Explo[$i];
  			}
 
-			$pdf->Cell(19 ,3,'PERSONAL REPORT FOR '.$namePassed,0,0);//end of line
+			$pdf->Cell(19 ,3,'PERSONAL REPORT ',0,0);//end of line
 
  	 		$pdf->Cell(130 ,5,'',0,1);
 			//set font to arial, regular, 12pt
@@ -268,14 +268,16 @@ $title = 'SUNBI CLINIC';
 			$pdf->Cell(60 ,5,'Patient Name',1,0);
 			$pdf->Cell(35,5,'Patient Number',1,0);
 			$pdf->Cell(50 ,5,'Staff Name',1,0);
-			$pdf->Cell(50 ,5,'Disease Name',1,0);//end of line
+			$pdf->Cell(50 ,5,'Diagnosis',1,0);//end of line
 			$pdf->Cell(40,5,'CP Time Started ',1,0);
 			$pdf->Cell(40,5,'CP Time Ended',1,1);
 		
 			$pdf->Cell(275 ,5,'',1,1);
 		
 
-			$getAllStaff = "SELECT patients.fullname, patients.uniqueID, activeLog.cpTimeStarted, activeLog.cpTimeEnded, diseaseRecord.diseaseName, staff.staffName FROM staff, patients, activeLog, diseaseRecord WHERE activeLog.id = diseaseRecord.aid AND patients.uniqueID = diseaseRecord.pID AND staff.staffNumber = activeLog.coID ";
+			$getAllStaff = "SELECT patients.fullname, patients.uniqueID, activeLog.cpTimeStarted, activeLog.cpTimeEnded, diseaseRecord.diseaseName, staff.staffName 
+            FROM staff, patients, activeLog, diseaseRecord 
+            WHERE activeLog.id = diseaseRecord.aid AND patients.uniqueID = diseaseRecord.pID AND staff.staffNumber = activeLog.coID AND patients.uniqueID = '".$Explo[0]."'";
 			$getStaffQuery = mysqli_query($con, $getAllStaff);
 			$getStaffNum = mysqli_num_rows($getStaffQuery);
 

@@ -12,11 +12,31 @@ function getNewID($letter,$tableName){
 	*/
 
 	require 'Connection.php';
+    
+    //Longer version
+    
+    $title = '';
+    
+    if($letter == 'LT'){
+        $title = 'Lab Tech';
+    }else if ($letter == 'PH'){
+        $title = 'Pharmacist';
+    }else if($letter == 'CO'){
+        $title = 'Clinic Officer';
+    }else if($letter == 'N'){
+        $title = 'Nurse';
+    }
 
 	//Count all the records from the table, in our example tblpupils
 	
+    $sql = '';
+    if($tableName == 'staff' || $tableName == 'Staff'){
+        $sql = "SELECT COUNT(*) as total FROM ".$tableName." WHERE staffTitle = '$title'";
+    }else {
+        $sql = "SELECT COUNT(*) as total FROM ".$tableName;
+    }
 
-	$sql = "SELECT COUNT(*) as total FROM ".$tableName;
+	
 
 	$runQuery = mysqli_query($con, $sql);
 
@@ -42,7 +62,7 @@ function getNewID($letter,$tableName){
 
 		}
 	}else {
-		$newId = $letter."01";
+		$newId = $letter."001";
 	}
 
 	return $newId;

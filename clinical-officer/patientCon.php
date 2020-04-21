@@ -33,6 +33,8 @@
 	$pFeelings = '';
 	$coFind = '';
 	$labResults = '';
+    $pBP = '';
+    $pTemp = '';
 
 	if (($num = mysqli_num_rows($query))>0) {
 		# code...
@@ -55,6 +57,8 @@
 								
 						$pFeelings = $aRows['pFeelings'];
 						$coFind =  $aRows['coFinding'];
+                        $pBP = $aRows['pBP'];
+                        $pTemp = $aRows['pTemp'];
 
 					}
 			}
@@ -116,13 +120,23 @@
                     <form class="form-group" action="../logic/labResults.php" method="POST">
                     <input type="text" name="pID" value="<?php echo $pID; ?>" hidden="">
                     <input type="text" name="aID" value="<?php echo $activeID; ?>" hidden="">
-                    <div class="col-md-12">
-                        <div class="col-md-6">
-                            <h4 style="text-align: center;">Patient Feelings </h4>
-                            <textarea rows="6" class="form-control" name="patientFeelings" placeholder="How the Patient is feeling"><?php echo $pFeelings; ?></textarea>
+                    <div class="col-md-6">
+                            <h4 style="text-align: center;">Patient Blood Pressure </h4>
+                            <input type="text" class="form-control" value="<?php echo $pBP ?>" readonly />
+
                         </div>
                         <div class="col-md-6">
-                            <h4 style="text-align: center;">Clinical Officer Finding </h4>
+                            <h4 style="text-align: center;">Patient Temperature </h4>
+                          <input type="text" class="form-control" value="<?php echo $pTemp ?>" readonly />
+
+                        </div>
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <h4 style="text-align: center;">Patient Complaints </h4>
+                            <textarea rows="6" class="form-control" name="patientFeelings" placeholder="The patients complaint"><?php echo $pFeelings; ?></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 style="text-align: center;">Conditions </h4>
                             <textarea rows="6" class="form-control" name="coFindings" placeholder="What the clinical officer found from the patient"><?php echo $coFind; ?></textarea>
                         </div>
                         &nbsp;
@@ -135,29 +149,13 @@
                         </div>
                     </div><br>
                     <div class="col-md-12">
-                        <label>Possible Disease</label>
-                        <input type="text" class="form-control" placeholder="Possible disease" name="possibleDisease">
+                        <label>Diagnosis</label>
+                        <input type="text" class="form-control" placeholder="Diagnosis disease" name="possibleDisease">
                     </div><br>
                     <div class="col-md-12">
-                        <?php 
-                            $sqlDrugs = "SELECT * FROM drugs";
-                            $result = mysqli_query($con, $sqlDrugs);
-                        
-                            
-                        ?>
-                        <h3>Pick the drugs</h3>
-                        <select id="getDrugID" class="form-control" onchange="accountSelect(this)">
-                            <?php
-                                
-                            while($rows = mysqli_fetch_assoc($result)){
-                                echo '<option value="'.$rows['drugName'].'">'.$rows['drugName'].'</option>';
-                            }
-                            ?>
-               
-                        </select>
-
-                        <br>
-                        <textarea rows="6" name="drugs" id="updateMe" class="form-control" placeholder="This will be updated with the selected items from the drop down"></textarea>
+    
+                        <label>Treatment </label>
+                        <textarea rows="6" name="drugs" id="updateMe" class="form-control" placeholder="Treatment"></textarea>
                     </div><br>
 
                     <div class="col-md-6">

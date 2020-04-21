@@ -6,7 +6,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Form Validation</title>
+    <title>Add Patients</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
     <link href="../assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
@@ -24,7 +24,7 @@
         <!-- ============================================================== -->
          <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="../index.html">Sunbi</a>
+                <a class="navbar-brand" href="../">Sunbi</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -85,13 +85,13 @@
                                 <div id="submenu-4" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/form-elements.php">Add Admin</a>
+                                            <a class="nav-link" href="addAdmin.php">Add Admin</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/form-validation.php">Add Patient</a>
+                                            <a class="nav-link" href="addPatients.php">Add Patient</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/multiselect.html">Add Staff</a>
+                                            <a class="nav-link" href="addStaff.php">Add Staff</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -101,11 +101,9 @@
                                 <div id="submenu-5" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/general-table.html">General Tables</a>
+                                            <a class="nav-link" href="Report.php">Reports Page</a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="pages/data-tables.html">Data Tables</a>
-                                        </li>
+                                   
                                     </ul>
                                 </div>
                             </li>

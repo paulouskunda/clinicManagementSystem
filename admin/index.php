@@ -39,22 +39,12 @@
                 </button>
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto navbar-right-top">
-                        <li class="nav-item">
-                            <div id="custom-search" class="top-search-bar">
-                                <input class="form-control" type="text" placeholder="Search..">
-                            </div>
-                        </li>
+                 
                    
                         
                         <li class="nav-item dropdown nav-user">
                             <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
-                                <div class="nav-user-info">
-                                    <h5 class="mb-0 text-white nav-user-name">John Abraham </h5>
-                                    <span class="status"></span><span class="ml-2">Available</span>
-                                </div>
-                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
                                 <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>Logout</a>
                             </div>
                         </li>
@@ -94,7 +84,7 @@
                                 <div id="submenu-4" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/form-elements.php">Add Admin</a>
+                                            <a class="nav-link" href="pages/addAdmin.php">Add Admin</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="pages/addPatients.php">Add Patient</a>
@@ -113,11 +103,9 @@
                                 <div id="submenu-5" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/general-table.html">General Tables</a>
+                                            <a class="nav-link" href="pages/Report.php">Reports Page</a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="pages/data-tables.html">Data Tables</a>
-                                        </li>
+                                        
                                     </ul>
                                 </div>
                             </li>
@@ -165,11 +153,7 @@
                     <!-- ============================================================== -->
                     <div class="row">
                         <div class="offset-xl-10 col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12">
-                            <form>
-                                <div class="form-group">
-                                    <input class="form-control" type="text" name="daterange" value="01/01/2018 - 01/15/2018" />
-                                </div>
-                            </form>
+                     
                         </div>
                     </div>
                     <?php
@@ -233,209 +217,12 @@
                     <!-- ============================================================== -->
                     <!-- end revenue year  -->
                     <!-- ============================================================== -->
-                    <div class="row">
-                        <!-- ============================================================== -->
-                        <!-- ap and ar balance  -->
-                        <!-- ============================================================== -->
-                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="card">
-                                <h5 class="card-header">AP and AR Balance
-                                </h5>
-                                <div class="card-body">
-                                    <canvas id="chartjs_balance_bar"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ============================================================== -->
-                        <!-- end ap and ar balance  -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- gross profit  -->
-                        <!-- ============================================================== -->
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                            <div class="card">
-                                <h5 class="card-header">% of Income Budget</h5>
-                                <div class="card-body">
-                                    <div id="morris_gross" style="height: 272px;"></div>
-                                </div>
-                                <div class="card-footer bg-white">
-                                    <p>Budget <span class="float-right text-dark">12,000.00</span></p>
-                                    <p>Balance<span class="float-right text-dark">-2300.00 <span class="ml-2 text-secondary"><i class="fas fa-caret-up mr-1"></i>25%</span></span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ============================================================== -->
-                        <!-- end gross profit  -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- profit margin  -->
-                        <!-- ============================================================== -->
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                            <div class="card">
-                                <h5 class="card-header">% of Expenses Budget</h5>
-                                <div class="card-body">
-                                    <div id="morris_profit" style="height: 272px;"></div>
-                                </div>
-                                <div class="card-footer bg-white">
-                                    <p>Budget <span class="float-right text-dark">3500.00</span></p>
-                                    <p>Balance <span class="float-right text-dark">230.00 <span class="ml-2 text-secondary"><i class="fas fa-caret-up mr-1"></i>25%</span></span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                   
                     <!-- ============================================================== -->
                     <!-- end profit margin -->
                     <!-- ============================================================== -->
                     <!-- ============================================================== -->
-                    <!-- earnings before interest tax  -->
-                    <!-- ============================================================== -->
-                    <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                            <div class="card">
-                                <h5 class="card-header">EBIT (Earnings Before Interest & Tax)</h5>
-                                <div class="card-body">
-                                    <div id="ebit_morris"></div>
-                                    <div class="text-center">
-                                        <span class="legend-item mr-3">
-                                                <span class="fa-xs text-secondary mr-1 legend-tile"><i class="fa fa-fw fa-square-full"></i></span>
-                                        <span class="legend-text">EBIT (Earnings Before Interest & Tax)</span>
-                                        </span>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ============================================================== -->
-                        <!-- end earnings before interest tax  -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- cost of goods  -->
-                        <!-- ============================================================== -->
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                            <div class="card">
-                                <h5 class="card-header">Cost of goods / Services <span class="float-right">1 Jan 2018 to 31 Dec 2018</span></h5>
-                                <div class="card-body">
-                                    <div id="goodservice"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ============================================================== -->
-                        <!-- end cost of goods  -->
-                        <!-- ============================================================== -->
-                    </div>
-                    <div class="row">
-                        <!-- ============================================================== -->
-                        <!-- overdue invoices  -->
-                        <!-- ============================================================== -->
-                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                            <div class="card">
-                                <h5 class="card-header">Disputed vs Overdue Invoices</h5>
-                                <div class="card-body">
-                                    <div class="ct-chart-invoice ct-golden-section"></div>
-                                    <div class="text-center m-t-40">
-                                        <span class="legend-item mr-3">
-                                                    <span class="fa-xs text-primary mr-1 legend-tile"><i class="fa fa-fw fa-square-full "></i></span><span class="legend-text">Disputed Invoices</span>
-                                        </span>
-                                        <span class="legend-item mr-3">
-                                                    <span class="fa-xs text-secondary mr-1 legend-tile"><i class="fa fa-fw fa-square-full "></i></span><span class="legend-text">Overdue Invoices</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ============================================================== -->
-                        <!-- end overdue invoices  -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- disputed invoices  -->
-                        <!-- ============================================================== -->
-                        <div class="col-xl-5 col-lg-6 col-md-6 col-sm-12 col-12">
-                            <div class="card">
-                                <h5 class="card-header">Disputed Invoices</h5>
-                                <div class="card-body">
-                                    <div class="ct-chart-line-invoice ct-golden-section"></div>
-                                    <div class="text-center m-t-10">
-                                        <span class="legend-item mr-3">
-                                                <span class="fa-xs text-primary mr-1 legend-tile"><i class="fa fa-fw fa-square-full"></i></span>
-                                        <span class="legend-text">Disputed Invoices</span>
-                                        </span>
-                                        <span class="legend-item mr-3">
-                                                <span class="fa-xs text-secondary mr-1 legend-tile"><i class="fa fa-fw fa-square-full"></i></span>
-                                        <span class="legend-text">Avarage</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ============================================================== -->
-                        <!-- end disputed invoices  -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- account payable age  -->
-                        <!-- ============================================================== -->
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                            <div class="card">
-                                <h5 class="card-header">Accounts Payable Age</h5>
-                                <div class="card-body">
-                                    <div id="account" style="height: 300px;"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ============================================================== -->
-                        <!-- end account payable age  -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- working capital  -->
-                        <!-- ============================================================== -->
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                            <div class="card">
-                                <h5 class="card-header">Working Capital <span class="float-right">1 Jan 2018 to 31 Dec 2018</span></h5>
-                                <div class="card-body">
-                                    <div id="capital"></div>
-                                    <div class="text-center m-t-10">
-                                        <span class="legend-item mr-3">
-                                                <span class="fa-xs text-secondary mr-1 legend-tile"><i class="fa fa-fw fa-square-full"></i></span>
-                                        <span class="legend-text">Working Capital</span>
-                                        </span>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ============================================================== -->
-                        <!-- end working capital  -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- inventory turnover  -->
-                        <!-- ============================================================== -->
-                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="card">
-                                <h5 class="card-header">Inventory Turnover</h5>
-                                <div class="card-body">
-                                    <div class="ct-chart-inventory ct-golden-section"></div>
-                                    <div class="text-center m-t-10">
-                                        <span class="legend-item mr-3">
-                                                <span class="fa-xs text-primary mr-1 legend-tile"><i class="fa fa-fw fa-square-full"></i></span>
-                                        <span class="legend-text">Turnover</span>
-                                        </span>
-                                        <span class="legend-item mr-3">
-                                                <span class="fa-xs text-secondary mr-1 legend-tile"><i class="fa fa-fw fa-square-full"></i></span>
-                                        <span class="legend-text">Target</span>
-                                        </span>
-                                        <span class="legend-item mr-3">
-                                                <span class="fa-xs text-info mr-1 legend-tile"><i class="fa fa-fw fa-square-full"></i></span>
-                                        <span class="legend-text">Acheived</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- ============================================================== -->
-                    <!-- end inventory turnover -->
-                    <!-- ============================================================== -->
+
                 </div>
             </div>
             <!-- ============================================================== -->
