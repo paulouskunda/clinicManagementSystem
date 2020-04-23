@@ -54,7 +54,7 @@ $pdf->Ln();
 $pdf->Ln();
 $pdf->Ln();
 $pdf->SetFont('Arial','B',18);
-$pdf->Cell(190,5,'Sunbi Clinic',0,0,'C');
+$pdf->Cell(190,5,'SUMBU Clinic',0,0,'C');
 $pdf->Ln();
 $pdf->Ln();
 $pdf->Cell(190,5,'Referral of '.$_SESSION['refDiseaseName'],0,0,'C');

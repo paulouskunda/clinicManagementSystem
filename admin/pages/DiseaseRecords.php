@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="../assets/vendor/charts/morris-bundle/morris.css">
     <link rel="stylesheet" type="text/css" href="../assets/vendor/daterangepicker/daterangepicker.css" />
-    <title>SUNBI CLINIC MANAGEMENT SYSTEM</title>
+    <title>SUMBU CLINIC MANAGEMENT SYSTEM</title>
 </head>
 
 <body>
@@ -33,7 +33,7 @@
         <!-- ============================================================== -->
         <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="index.html">SUNBI</a>
+                <a class="navbar-brand" href="index.html">SUMBU</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

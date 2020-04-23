@@ -12,7 +12,7 @@ $query = mysqli_query($con, $SQL);
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Clinic Record Management System || Sunbi Clinic</title>
+	<title>Clinic Record Management System || SUMBU Clinic</title>
 	<link rel="stylesheet" type="text/css" href="../style/css/bootstrap.min.css">
 </head>
 <body>
@@ -30,7 +30,7 @@ $query = mysqli_query($con, $SQL);
 
                 ?>
 		<div class="row">
-			<h2 style="text-align: center;">WELCOME NAME OF THE SUNBI CLINIC</h2>
+			<h2 style="text-align: center;">WELCOME NAME OF THE SUMBU CLINIC</h2>
 			<table class="table">
 				<thead style="font-style: bond;">
 				

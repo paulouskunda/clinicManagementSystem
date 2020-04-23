@@ -23,7 +23,7 @@ $pdf->AddPage();
 //set font to arial, bold, 14pt
 $pdf->SetFont('Arial','B',14);
 
-$title = 'SUNBI CLINIC';
+$title = 'SUMBU CLINIC';
 
  if($getParam == 'allPatients'){
  	$pdf->Cell(130 ,5,'',0,0);
