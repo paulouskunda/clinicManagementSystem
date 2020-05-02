@@ -177,9 +177,31 @@
                         <input type="text" class="form-control" placeholder="Diagnosis disease" name="possibleDisease">
                     </div><br>
                     <div class="col-md-12">
+<<<<<<< HEAD
     
                         <label>Treatment </label>
                         <textarea rows="6" name="drugs" id="updateMe" class="form-control" placeholder="Treatment"></textarea>
+=======
+                        <?php 
+                            $sqlDrugs = "SELECT * FROM drugs";
+                            $result = mysqli_query($con, $sqlDrugs);
+                        
+                            
+                        ?>
+                        <h3>Pick the drugs</h3>
+                        <select id="getDrugID" class="form-control" onchange="accountSelect(this)">
+                            <?php
+                                
+                            while($rows = mysqli_fetch_assoc($result)){
+                                echo '<option value="'.$rows['drugName'].'">'.$rows['drugName'].'</option>';
+                            }
+                            ?>
+               
+                        </select>
+
+                        <br>
+                        <textarea rows="6" name="drugs" id="updateMe" class="form-control" placeholder="This will be updated with the selected items from the drop down"></textarea>
+>>>>>>> Up to Date
                     </div><br>
 
                     <div class="col-md-6">

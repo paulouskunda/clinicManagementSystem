@@ -211,9 +211,15 @@
                                                 <option value="allStaff">Staff List</option>
                                                 <option value="allPatients">Patients</option>
                                                 <option value="diseaseBased">Disease Based</option>
+<<<<<<< HEAD
                                                 <option value="diseaseCount">Disease Count</option>
                                                 <option value="ageGroup">Clinical admit </option>
                                                 <!-- <option value="genderReport">Gender Based</option> -->
+=======
+                                                <option value="singlePatient">Single Patient Report</option>
+                                                <option value="ageGroup">Age Group</option>
+                                                <option value="genderReport">Gender Based</option>
+>>>>>>> Up to Date
                                             </select>
                                             </div>
 
@@ -249,10 +255,17 @@
                                                 </select> -->
                                                 
                                               <label class="control-label mb-1">Disease Record</label><br>
+<<<<<<< HEAD
                                             <select class="form-control" name="selectDisease">
                                                 <?php
 
                                                     $sqlDiseases = "SELECT DISTINCT(diseaseName) FROM diseaserecord";
+=======
+                                            <select class="form-control" name="selectedGender">
+                                                <?php
+
+                                                    $sqlDiseases = "SELECT diseaseName FROM diseaserecord";
+>>>>>>> Up to Date
                                                     $queryDisease = mysqli_query($con, $sqlDiseases);
                                                     $numDiseases = mysqli_num_rows($queryDisease);
                                                  
@@ -391,7 +404,19 @@
 
     function accountSelect(select) {
             // document.getElementById('hidden_div');
+<<<<<<< HEAD
            if (select.value == 'diseaseBased') {
+=======
+            if (select.value == 'singlePatient') {
+                    document.getElementById('hidden_div').style.display = "block";
+                    document.getElementById('hidden_gender').style.display = "none";
+                document.getElementById('hidden_date').style.display = "none";
+
+                    <?php
+                        $whoCalledMe = "singlePatient";
+                    ?>
+            } else if (select.value == 'diseaseBased') {
+>>>>>>> Up to Date
                     document.getElementById('hidden_div_diseaseBased').style.display = "block";
                     document.getElementById('hidden_div').style.display = "none";
                     document.getElementById('hidden_gender').style.display = "none";

@@ -10,11 +10,24 @@ require '../includeFiles/Connection.php';
 
 </head>
 <body>
+    <div class="container">
+    	<div class="card">
+    		<div class="card-body">
+    			<div class="card-title">Thank You, Get Well Soon.</div>
+
+    			<?php  
+			        echo $_SESSION['doneMessage'];
+			        unset($_SESSION['doneMessage']);
+   				 ?>
+    		</div>
+    	</div>
+
+
+    	
+
+
+    </div>
     
-    <?php  
-        echo $_SESSION['doneMessage'];
-        unset($_SESSION['doneMessage']);
-    ?>
 
 </body>
 </html>

@@ -229,6 +229,7 @@ $title = 'SUMBU CLINIC';
         $getStaffQuery = mysqli_query($con, $getAllStaff);
         $getStaffNum = mysqli_num_rows($getStaffQuery);
 
+<<<<<<< HEAD
         if ($getStaffNum > 0) {
             # code...
 				
@@ -237,6 +238,27 @@ $title = 'SUMBU CLINIC';
                 $staffFullName = $getStaff['staffName'];
                 $staffDOB = $getStaff['staffDOB'];
                 $nrc = $getStaff['nrc'];
+=======
+			if ($getStaffNum > 0) {
+				# code...
+			
+				while ($getStaff = mysqli_fetch_assoc($getStaffQuery)) {
+					# code...
+					$staffFullName = $getStaff['staffName'];
+					$patientName = $getStaff['fullname'];
+					$diseaseName = $getStaff['diseaseName'];
+
+					$pdf->Cell(60,5,''.$patientName.'',1,0);
+					$pdf->Cell(35,5,''.$getStaff['uniqueID'],1,0,'L');
+					$pdf->Cell(50,5,''.$staffFullName.'',1,0);
+					$pdf->Cell(50,5,' '.$diseaseName.'',1,0,'L');
+					$pdf->Cell(40,5,''.$getStaff['cpTimeStarted'],1,0,'L');
+					$pdf->Cell(40,5,''.$getStaff['cpTimeEnded'],1,1,'L');//end of line
+				}
+			} else {
+				$pdf->Cell(270,5,'No data avaliable right now',1,1,'L');
+			}
+>>>>>>> Up to Date
 
                 $pdf->Cell(50,5,''.$staffFullName.'',1,0);
                 $pdf->Cell(40,5,''.$staffDOB.'',1,0);
