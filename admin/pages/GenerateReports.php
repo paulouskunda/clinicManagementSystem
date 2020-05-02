@@ -161,6 +161,50 @@ $title = 'SUMBU CLINIC';
         //make a dummy empty cell as a vertical spacer
         $pdf->Cell(189 ,10,'',0,1);//end of line
 
+<<<<<<< HEAD
+=======
+				
+				//invoice contents
+				$pdf->SetFont('Arial','B',12);
+
+				$pdf->Cell(60 ,5,'Patient Name',1,0);
+				$pdf->Cell(35,5,'Patient Number',1,0);
+				$pdf->Cell(50 ,5,'Staff Name',1,0);
+				$pdf->Cell(50 ,5,'Diagnosis',1,0);//end of line
+				$pdf->Cell(40,5,'CP Time Started ',1,0);
+				$pdf->Cell(40,5,'CP Time Ended',1,1);
+			
+				$pdf->Cell(275 ,5,'',1,1);
+				// $pdf->Cell(35,5,'',1,0);
+				// $pdf->Cell(50 ,5,'',1,0);
+				// $pdf->Cell(50 ,5,'',1,0);//end of line
+				// $pdf->Cell(40,5,'',1,0);
+				// $pdf->Cell(40,5,'',1,1);
+
+				$getAllStaff = "SELECT patients.fullname, patients.uniqueID, activeLog.cpTimeStarted, activeLog.cpTimeEnded, diseaseRecord.diseaseName, staff.staffName FROM staff, patients, activeLog, diseaseRecord WHERE activeLog.id = diseaseRecord.aid AND patients.uniqueID = diseaseRecord.pID AND staff.staffNumber = activeLog.coID ";
+				$getStaffQuery = mysqli_query($con, $getAllStaff);
+				$getStaffNum = mysqli_num_rows($getStaffQuery);
+
+				if ($getStaffNum > 0) {
+					# code...
+				
+					while ($getStaff = mysqli_fetch_assoc($getStaffQuery)) {
+						# code...
+						$staffFullName = $getStaff['staffName'];
+						$patientName = $getStaff['fullname'];
+						$diseaseName = $getStaff['diseaseName'];
+
+						$pdf->Cell(60,5,''.$patientName.'',1,0);
+						$pdf->Cell(35,5,''.$getStaff['uniqueID'],1,0,'L');
+						$pdf->Cell(50,5,''.$staffFullName.'',1,0);
+						$pdf->Cell(50,5,' '.$diseaseName.'',1,0,'L');
+						$pdf->Cell(40,5,''.$getStaff['cpTimeStarted'],1,0,'L');
+						$pdf->Cell(40,5,''.$getStaff['cpTimeEnded'],1,1,'L');//end of line
+					}
+				} else {
+				$pdf->Cell(270,5,'No data avaliable right now',1,1,L);
+				}
+>>>>>>> Master Paulous Changes - New Changes
 
         //invoice contents
         $pdf->SetFont('Arial','B',12);
@@ -178,9 +222,13 @@ $title = 'SUMBU CLINIC';
         if ($getPatientsNum > 0) {
             # code...
 
+<<<<<<< HEAD
             while ($getPatients = mysqli_fetch_assoc($getPatientsQuery)) {
                 # code...
          
+=======
+ 	$Explo = explode(",", $getID);
+>>>>>>> Master Paulous Changes - New Changes
 
                 $pdf->Cell(90,5,''.$getPatients['diseaseName'].'',1,0);
                 $pdf->Cell(90,5,''.$getPatients['TOTALNUMBER'].'',1,1,'L');
@@ -188,7 +236,11 @@ $title = 'SUMBU CLINIC';
         }
 
 
+<<<<<<< HEAD
         $pdf->SetFont('Arial','',12);
+=======
+			$pdf->Cell(19 ,3,'PERSONAL REPORT ',0,0);//end of line
+>>>>>>> Master Paulous Changes - New Changes
 
         //Numbers are right-aligned so we give 'R' after new line parameter
         $pdf->Output();
@@ -218,6 +270,7 @@ $title = 'SUMBU CLINIC';
         //invoice contents
         $pdf->SetFont('Arial','B',12);
 
+<<<<<<< HEAD
         $pdf->Cell(50 ,5,'Full Name',1,0);
         $pdf->Cell(40 ,5,'Date of Birth',1,0);
         $pdf->Cell(40 ,5,'NRCNUMBER',1,0);//end of line
@@ -228,6 +281,23 @@ $title = 'SUMBU CLINIC';
         $getAllStaff = "SELECT * FROM staff ";
         $getStaffQuery = mysqli_query($con, $getAllStaff);
         $getStaffNum = mysqli_num_rows($getStaffQuery);
+=======
+			$pdf->Cell(60 ,5,'Patient Name',1,0);
+			$pdf->Cell(35,5,'Patient Number',1,0);
+			$pdf->Cell(50 ,5,'Staff Name',1,0);
+			$pdf->Cell(50 ,5,'Diagnosis',1,0);//end of line
+			$pdf->Cell(40,5,'CP Time Started ',1,0);
+			$pdf->Cell(40,5,'CP Time Ended',1,1);
+		
+			$pdf->Cell(275 ,5,'',1,1);
+		
+
+			$getAllStaff = "SELECT patients.fullname, patients.uniqueID, activeLog.cpTimeStarted, activeLog.cpTimeEnded, diseaseRecord.diseaseName, staff.staffName 
+            FROM staff, patients, activeLog, diseaseRecord 
+            WHERE activeLog.id = diseaseRecord.aid AND patients.uniqueID = diseaseRecord.pID AND staff.staffNumber = activeLog.coID AND patients.uniqueID = '".$Explo[0]."'";
+			$getStaffQuery = mysqli_query($con, $getAllStaff);
+			$getStaffNum = mysqli_num_rows($getStaffQuery);
+>>>>>>> Master Paulous Changes - New Changes
 
 <<<<<<< HEAD
         if ($getStaffNum > 0) {

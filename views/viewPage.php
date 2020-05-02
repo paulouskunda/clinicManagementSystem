@@ -74,7 +74,11 @@ if (isset($_SESSION['pID'])) {
 					<form method="POST" action="">
 						<input type="text" name="uniqueID" hidden="" value="<?php echo $pID; ?>">
 						<input type="text" name="bpPressure" placeholder="BP">
+<<<<<<< HEAD
 						<input type="text" name="temp" placeholder="">
+=======
+						<input type="text" name="tempter" placeholder="">
+>>>>>>> Master Paulous Changes - New Changes
 						<button  name="activeButton" class="btn btn-primary">Start Clinic Process</button>
 					</form>
 					<?php

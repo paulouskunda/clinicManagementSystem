@@ -24,7 +24,11 @@
         <!-- ============================================================== -->
          <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
+<<<<<<< HEAD
                 <a class="navbar-brand" href="../">SUMBU</a>
+=======
+                <a class="navbar-brand" href="../">Sunbi</a>
+>>>>>>> Master Paulous Changes - New Changes
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

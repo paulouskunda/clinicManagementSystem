@@ -178,6 +178,7 @@
                     </div><br>
                     <div class="col-md-12">
 <<<<<<< HEAD
+<<<<<<< HEAD
     
                         <label>Treatment </label>
                         <textarea rows="6" name="drugs" id="updateMe" class="form-control" placeholder="Treatment"></textarea>
@@ -202,6 +203,11 @@
                         <br>
                         <textarea rows="6" name="drugs" id="updateMe" class="form-control" placeholder="This will be updated with the selected items from the drop down"></textarea>
 >>>>>>> Up to Date
+=======
+    
+                        <label>Treatment </label>
+                        <textarea rows="6" name="drugs" id="updateMe" class="form-control" placeholder="Treatment"></textarea>
+>>>>>>> Master Paulous Changes - New Changes
                     </div><br>
 
                     <div class="col-md-6">
