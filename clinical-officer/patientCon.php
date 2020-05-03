@@ -140,6 +140,27 @@
                             <textarea rows="6" class="form-control" name="coFindings" placeholder="What the clinical officer found from the patient"><?php echo $coFind; ?></textarea>
                         </div>
                         &nbsp;
+
+                        <?php
+
+                            $labSql = "SELECT * FROM labTech WHERE aID = '$activeID'";
+                            $results = mysqli_query($con, $labSql);
+                            if (mysqli_num_rows($results) > 0) {
+
+                                # code...
+                                while($labFetch = mysqli_fetch_assoc($results)){
+                                        echo '<div class="col-md-12">
+                                            <label>Lab Test Results</label>
+                                            <input type="text" class="form-control" value="'.$labFetch['testFor'].'" placeholder="Test for" name="testFor" readonly>
+                                            </div><br>';
+                                }
+                            }else {
+                                    echo '<div class="col-md-12">
+                                            <label>Lab Test for</label>
+                                            <input type="text" class="form-control" placeholder="Test for" name="testFor">
+                                            </div><br>';
+                            }
+                        ?>
                         <div class="col-md-12">
 
 
@@ -148,6 +169,8 @@
                             <!-- -->
                         </div>
                     </div><br>
+                     
+
                     <div class="col-md-12">
                         <label>Diagnosis</label>
                         <input type="text" class="form-control" placeholder="Diagnosis disease" name="possibleDisease">
@@ -216,8 +239,7 @@
                                         <td>Date </td>
                                         <td>Disease Record</td>
                                         <td>Clinical Officer</td>
-                                        <td>Referral</td>
-                                        <td>View Details</td>
+                                      
                                     </thead>
                                     <tbody>
                                         <?php
@@ -228,8 +250,7 @@
                                                         <td>'.$rowP['cpDate'].'</td>
                                                         <td>'.$rowP['diseaseName'].'</td>
                                                         <td>'.$rowP['staffName'].'</td>
-                                                        <td>No</td>
-                                                        <td><button>View</button></td>
+                                                        
                                                     </tr>';
                                                 }
                                             }else{

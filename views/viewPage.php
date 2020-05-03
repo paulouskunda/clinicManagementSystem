@@ -12,6 +12,8 @@ if (isset($_POST['activeButton'])) {
 			$dateStarted = date("Y-m-d");
 			$nurseID = $_SESSION['nurse'];
 			$activeStatus = 'active';
+			 $pBP = mysqli_real_escape_string($con, $_POST['bpPressure']);
+            $pTemp = mysqli_real_escape_string($con, $_POST['temp']);
 
 			//query if the instance of the record of the current patient
 
@@ -22,7 +24,7 @@ if (isset($_POST['activeButton'])) {
 				echo "Sorry record for the patient already avaliable, direct them to the CO offiec";
 			}else {
 
-				$activeSQL = "INSERT INTO activelog(pUniqueID,nurseID,cpDate,cpTimeStarted,activeStatus) VALUES ('$pUniqueID','$nurseID','$dateStarted','$timeStarted','$activeStatus')";
+				$activeSQL = "INSERT INTO activelog(pUniqueID,nurseID,cpDate,cpTimeStarted,activeStatus, pBP, pTemp) VALUES ('$pUniqueID','$nurseID','$dateStarted','$timeStarted','$activeStatus', '$pBP', '$pTemp')";
 
 				if (mysqli_query($con, $activeSQL)) {
 					# code...
@@ -72,7 +74,7 @@ if (isset($_SESSION['pID'])) {
 					<form method="POST" action="">
 						<input type="text" name="uniqueID" hidden="" value="<?php echo $pID; ?>">
 						<input type="text" name="bpPressure" placeholder="BP">
-						<input type="text" name="tempter" placeholder="">
+						<input type="text" name="temp" placeholder="">
 						<button  name="activeButton" class="btn btn-primary">Start Clinic Process</button>
 					</form>
 					<?php

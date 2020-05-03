@@ -2,6 +2,21 @@
 	require '../includeFiles/Connection.php';
 	require '../includeFiles/header.php';
 
+	$id = $_GET['id'];
+
+
+	$SQLpatient = "SELECT patients.fullname, labtech.testFor FROM labtech, patients WHERE labtech.pUniqueID = patients.uniqueID AND labtech.id = '$id'";
+	$patientName = '$id';
+	$testFor = '';
+
+	$patientsQuery = mysqli_query($con, $SQLpatient);
+	while ($rowsInner = mysqli_fetch_assoc($patientsQuery)) {
+		# code...
+
+		$patientName = $rowsInner['fullname'];
+		$testFor = $rowsInner['testFor'];
+
+	}
 	// $_SESSION['labtech'] = "LT1234";
 
 //    $get
@@ -11,17 +26,13 @@
 		$labDetails = mysqli_real_escape_string($con, $_POST['labDetails']);
 
 		$labID = $_SESSION['labtech'];
-		$id = $_GET['id'];
 		$getAID = $_GET['aID'];
 
 		$timeSentBack = date("h:i:sa");
 
 		$SQL = "UPDATE labtech SET labTechID = '$labID', labResults = '$labDetails', timeSentBack = '$timeSentBack', status = 'Done' WHERE id = '$id' ";
-
-		echo $labDetails . ' '.$id ;
 		if (mysqli_query($con, $SQL)) {
-			# code...
-			echo "It worked ayi";
+		
 
 			//Update the activityLog
 			$updateActivityLog = "UPDATE activelog SET activeStatus = 'waiting' WHERE id = '$getAID' ";
@@ -50,7 +61,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<br><h4 style="text-align: center">Here the Patient Id will be displayed </h4>
+			<br><h4 style="text-align: center">Test <strong> <?php echo $patientName; ?> </strong> For <strong> <?php echo $testFor; ?> </strong>  </h4>
 			<hr>
 		
             <?php

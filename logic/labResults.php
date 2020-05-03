@@ -114,6 +114,8 @@ if (isset($_POST['submit'])) {
 	$coFindings = mysqli_real_escape_string($con, $_POST['coFindings']);
 	// $possibleDisease = mysqli_real_escape_string($con, $_POST['possibleDisease']);
 	$aID = mysqli_real_escape_string($con, $_POST['aID']);
+	$testFor = mysqli_real_escape_string($con, $_POST['testFor']);
+
 
 
 	//update the activity log tab
@@ -123,11 +125,11 @@ if (isset($_POST['submit'])) {
 	echo $aID." ".$pFeelings;
 
 	if(mysqli_query($con, $sqlUPDATE)){
-		echo "It worked ";
 		$timeSentToLab = date("h:i:sa");
+		$dateSent = date('Y-m-d');
 
 		//Insert into the labTech table
-		$sql = "INSERT INTO labtech(pUniqueID,coID,status, aID, timeSentToLab) VALUES('$pUniqueID','$coID','$status','$aID','$timeSentToLab')";
+		$sql = "INSERT INTO labtech(pUniqueID,coID,status, aID, timeSentToLab, testFor, dateSent) VALUES('$pUniqueID','$coID','$status','$aID','$timeSentToLab', '$testFor', '$dateSent')";
 
 		if (mysqli_query($con, $sql)) {
 			# code...

@@ -35,7 +35,7 @@
         <!-- ============================================================== -->
          <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="../">SUNBI</a>
+                <a class="navbar-brand" href="../">SUMBU</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -167,7 +167,7 @@
                     </div>
                     <div class="row">
                        
-             		 <?php
+                     <?php
 
                             $whoCalledMe = null;
 
@@ -208,12 +208,13 @@
                                             </div>
                                             <div class="form-group">
                                             <select class="form-control" name="reportType"  onchange="accountSelect(this)">
-                                                <option value="allPatients">Patients</option>
                                                 <option value="allStaff">Staff List</option>
+                                                <option value="allPatients">Patients</option>
                                                 <option value="diseaseBased">Disease Based</option>
-                                                <option value="singlePatient">Single Patient Report</option>
-                                                <option value="ageGroup">Age Group</option>
-                                                <option value="genderReport">Gender Based</option>
+                                                <option value="diseaseCount">Disease Count</option>
+                                                <option value="ageGroup">Clinical admit </option>
+                                                <!-- <option value="genderReport">Gender Based</option> -->
+
                                             </select>
                                             </div>
 
@@ -238,7 +239,7 @@
                                                         }
                                                     } 
                                                 ?> 
-                                            		</select>
+                                                    </select>
 
 
 
@@ -249,10 +250,11 @@
                                                 </select> -->
                                                 
                                               <label class="control-label mb-1">Disease Record</label><br>
-                                            <select class="form-control" name="selectedGender">
+                                            <select class="form-control" name="selectDisease">
                                                 <?php
 
-                                                    $sqlDiseases = "SELECT diseaseName FROM diseaserecord";
+                                                    $sqlDiseases = "SELECT DISTINCT(diseaseName) FROM diseaserecord";
+
                                                     $queryDisease = mysqli_query($con, $sqlDiseases);
                                                     $numDiseases = mysqli_num_rows($queryDisease);
                                                  
@@ -273,6 +275,48 @@
                                         </div>
                                        
                                         <div class="form-group" id="hidden_date" style="display: none;">
+                                            <label class="control-label mb-1">Select Period</label><br>
+                                                <label class="control-label mb-1">From </label>
+                                            <select class="form-control" name="startDate">
+                                                <?php
+
+                                                    $dateStart = "SELECT cpDate FROM activelog ORDER BY ID ASC";
+                                                    $queryStartDate = mysqli_query($con, $dateStart);
+                                                    $numStart = mysqli_num_rows($queryStartDate);
+                                                 
+                                                    
+                                                if($numStart > 0 ){
+                                                 while($innerRow = mysqli_fetch_assoc($queryStartDate)){
+                                                    echo '<option value="'.$innerRow['cpDate'].'">'.$innerRow['cpDate'].'</option>';
+                                                    }
+                                                }else {
+                                                    echo '<option value="Nothing">Nothing</option>';
+                                                }
+                                                
+                                                ?>
+                                            </select> 
+                                                  <label class="control-label mb-1">To</label>
+                                            <select class="form-control" name="endDate">
+                                                <?php
+
+                                                    $dateStart = "SELECT cpDate FROM activelog ORDER BY ID DESC";
+                                                    $queryStartDate = mysqli_query($con, $dateStart);
+                                                    $numStart = mysqli_num_rows($queryStartDate);
+                                                 
+                                                    
+                                                if($numStart > 0 ){
+                                                 while($innerRow = mysqli_fetch_assoc($queryStartDate)){
+                                                    echo '<option value="'.$innerRow['cpDate'].'">'.$innerRow['cpDate'].'</option>';
+                                                    }
+                                                }else {
+                                                    echo '<option value="Nothing">Nothing</option>';
+                                                }
+                                                
+                                                ?>
+                                            </select>
+                                        
+                                        </div>    
+                                         <div class="form-group" id="hidden_date" style="display: none;">
                                             <label class="control-label mb-1">Enter Lowest Age</label><br>
                                             <label class="control-label mb-1">From </label>
                                             <input type="text" name="startAge" id="date" class="form-control" required="true">
@@ -303,7 +347,7 @@
                             </div>
                         </div>
            
-           			</div>
+                    </div>
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
@@ -311,7 +355,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                            Copyright © 2018 Sunbi. All rights reserved
+                            Copyright © 2018 SUMBU. All rights reserved
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                             <div class="text-md-right footer-links d-none d-sm-block">
@@ -349,6 +393,9 @@
 
     function accountSelect(select) {
             // document.getElementById('hidden_div');
+// <<<<<<< HEAD
+//            if (select.value == 'diseaseBased') {
+// =======
             if (select.value == 'singlePatient') {
                     document.getElementById('hidden_div').style.display = "block";
                     document.getElementById('hidden_gender').style.display = "none";
@@ -358,6 +405,7 @@
                         $whoCalledMe = "singlePatient";
                     ?>
             } else if (select.value == 'diseaseBased') {
+// >>>>>>> Up to Date
                     document.getElementById('hidden_div_diseaseBased').style.display = "block";
                     document.getElementById('hidden_div').style.display = "none";
                     document.getElementById('hidden_gender').style.display = "none";
@@ -370,18 +418,12 @@
             }else if (select.value == 'single_date'){
                     document.getElementById('hidden_date').style.display = "block";
                     document.getElementById('hidden_div').style.display = "block";
-            } else if(select.value == 'ageGroup'){
+            } else if(select.value == 'allPatients' || select.value == 'diseaseCount'){
                 document.getElementById('hidden_date').style.display = "block";
                     document.getElementById('hidden_div').style.display = "none";
                      document.getElementById('hidden_gender').style.display = "none";
                 document.getElementById('hidden_div_diseaseBased').style.display = "none";
-            } else if(select.value == 'genderReport'){
-                document.getElementById('hidden_div').style.display = "none";
-                document.getElementById('hidden_date').style.display = "none";
-                document.getElementById('hidden_div_diseaseBased').style.display = "none";
-                document.getElementById('hidden_gender').style.display = "block";
-
-            }else {
+            } else {
                 document.getElementById('hidden_div').style.display = "none";
                 document.getElementById('hidden_date').style.display = "none";
                 document.getElementById('hidden_gender').style.display = "none";
