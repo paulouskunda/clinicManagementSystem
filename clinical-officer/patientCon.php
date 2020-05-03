@@ -141,6 +141,27 @@
                         </div>
                         &nbsp;
 
+                        <?php
+
+                            $labSql = "SELECT * FROM labTech WHERE aID = '$activeID'";
+                            $results = mysqli_query($con, $labSql);
+                            if (mysqli_num_rows($results) > 0) {
+
+                                # code...
+                                //find me
+                                while($labFetch = mysqli_fetch_assoc($results)){
+                                        echo '<div class="col-md-12">
+                                            <label>Lab Test Results</label>
+                                            <input type="text" class="form-control" value="'.$labFetch['testFor'].'" placeholder="Test for" name="testFor" readonly>
+                                            </div><br>';
+                                }
+                            }else {
+                                    echo '<div class="col-md-12">
+                                            <label>Lab Test for</label>
+                                            <input type="text" class="form-control" placeholder="Test for" name="testFor">
+                                            </div><br>';
+                            }
+                        ?>
                         <div class="col-md-12">
 
 
@@ -230,7 +251,6 @@
                                                         <td>'.$rowP['cpDate'].'</td>
                                                         <td>'.$rowP['diseaseName'].'</td>
                                                         <td>'.$rowP['staffName'].'</td>
-                                                        
                                                     </tr>';
                                                 }
                                             }else{
@@ -315,4 +335,3 @@ window.onload = function(){
 
 }
 </script>
-</html>
