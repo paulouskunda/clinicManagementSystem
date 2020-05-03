@@ -279,26 +279,40 @@
                                         <div class="form-group" id="hidden_date" style="display: none;">
                                             <label class="control-label mb-1">Select Period</label><br>
                                                 <label class="control-label mb-1">From </label>
-                                            <select class="form-control" name="startDate">
-                                                <?php
+<!--                                             <select class="form-control" name="startDate">
+ -->                                                <?php
 
-                                                    $dateStart = "SELECT cpDate FROM activelog ORDER BY ID ASC";
+                                                    $dateStart = "SELECT cpDate FROM activelog ORDER BY ID ASC LIMIT 1";
                                                     $queryStartDate = mysqli_query($con, $dateStart);
                                                     $numStart = mysqli_num_rows($queryStartDate);
                                                  
                                                     
                                                 if($numStart > 0 ){
                                                  while($innerRow = mysqli_fetch_assoc($queryStartDate)){
-                                                    echo '<option value="'.$innerRow['cpDate'].'">'.$innerRow['cpDate'].'</option>';
+                                                    echo '<input type="text" name="startDate" value="'.$innerRow['cpDate'].'"class="form-control" >';
                                                     }
                                                 }else {
-                                                    echo '<option value="Nothing">Nothing</option>';
-                                                }
+                                                    echo '<input type="text" name="startDate" class="form-control" >';                                                }
                                                 
                                                 ?>
-                                            </select> 
-                                                  <label class="control-label mb-1">To</label>
-                                            <select class="form-control" name="endDate">
+<!--                                             </select> 
+ -->                                                  <label class="control-label mb-1">To</label>
+                                             <?php
+
+                                                    $dateStart = "SELECT cpDate FROM activelog ORDER BY ID DESC LIMIT 1";
+                                                    $queryStartDate = mysqli_query($con, $dateStart);
+                                                    $numStart = mysqli_num_rows($queryStartDate);
+                                                 
+                                                    
+                                                if($numStart > 0 ){
+                                                 while($innerRow = mysqli_fetch_assoc($queryStartDate)){
+                                                    echo '<input type="text" value="'.$innerRow['cpDate'].'" name="endDate" class="form-control" >';
+                                                    }
+                                                }else {
+                                                    echo '<input type="text" name="endDate" class="form-control" >';                                                }
+                                                
+                                                ?>
+                                           <!--  <select class="form-control" name="endDate">
                                                 <?php
 
                                                     $dateStart = "SELECT cpDate FROM activelog ORDER BY ID DESC";
@@ -315,7 +329,7 @@
                                                 }
                                                 
                                                 ?>
-                                            </select>
+                                            </select> -->
                                         
                                         </div>    
                                          <div class="form-group" id="hidden_month" style="display: none;">
@@ -424,6 +438,8 @@
                     document.getElementById('hidden_div').style.display = "block";
                     document.getElementById('hidden_gender').style.display = "none";
                 document.getElementById('hidden_date').style.display = "none";
+                                document.getElementById('hidden_month').style.display = "none";
+
 
                     <?php
                         $whoCalledMe = "singlePatient";
@@ -434,6 +450,8 @@
                     document.getElementById('hidden_div').style.display = "none";
                     document.getElementById('hidden_gender').style.display = "none";
                 document.getElementById('hidden_date').style.display = "none";
+                                document.getElementById('hidden_month').style.display = "none";
+
 
 
                     <?php
@@ -446,6 +464,8 @@
                 document.getElementById('hidden_date').style.display = "block";
                     document.getElementById('hidden_div').style.display = "none";
                      document.getElementById('hidden_gender').style.display = "none";
+                                     document.getElementById('hidden_month').style.display = "none";
+
                 document.getElementById('hidden_div_diseaseBased').style.display = "none";
             } else if (select.value == 'clinicalAdmit') {
                 document.getElementById('hidden_div').style.display = "none";
