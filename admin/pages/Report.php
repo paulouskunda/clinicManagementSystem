@@ -212,7 +212,7 @@
                                                 <option value="allPatients">Patients</option>
                                                 <option value="diseaseBased">Disease Based</option>
                                                 <option value="diseaseCount">Disease Count</option>
-                                                <option value="ageGroup">Clinical admit </option>
+                                                <option value="clinicalAdmit">Clinical admit </option>
                                                 <!-- <option value="genderReport">Gender Based</option> -->
 
                                             </select>
@@ -273,6 +273,8 @@
 
 
                                         </div>
+
+
                                        
                                         <div class="form-group" id="hidden_date" style="display: none;">
                                             <label class="control-label mb-1">Select Period</label><br>
@@ -316,12 +318,34 @@
                                             </select>
                                         
                                         </div>    
-                                         <div class="form-group" id="hidden_date" style="display: none;">
-                                            <label class="control-label mb-1">Enter Lowest Age</label><br>
-                                            <label class="control-label mb-1">From </label>
-                                            <input type="text" name="startAge" id="date" class="form-control" required="true">
-                                            <label class="control-label mb-1">To</label>
-                                            <input type="text" name="endAge" class="form-control" required>
+                                         <div class="form-group" id="hidden_month" style="display: none;">
+                                            <?php
+
+
+                                            $monthsArray = array('January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+                                            ?>
+                                            <label class="control-label">Start Month</label>
+
+                                            <select class="form-control" name="startMonth">
+
+                                                <?php
+                                                    foreach ($monthsArray as $itemArray) {
+                                                        # code...
+                                                        echo '<option value="'.$itemArray.'">'.$itemArray.'</option>';
+                                                    }
+                                                ?>
+                                            </select>   
+                                             <label class="control-label">End Month</label>
+
+                                             <select class="form-control" name="endMonth">
+                                                <?php
+                                                    foreach ($monthsArray as $itemArray) {
+                                                        # code...
+                                                        echo '<option value="'.$itemArray.'">'.$itemArray.'</option>';
+                                                    }
+                                                ?>
+                                            </select>
+                                         
                                         </div>
                                         <div class="form-group" id="hidden_gender" style="display: none;">
                                             <label class="control-label mb-1">Select Gender</label><br>
@@ -423,11 +447,21 @@
                     document.getElementById('hidden_div').style.display = "none";
                      document.getElementById('hidden_gender').style.display = "none";
                 document.getElementById('hidden_div_diseaseBased').style.display = "none";
+            } else if (select.value == 'clinicalAdmit') {
+                document.getElementById('hidden_div').style.display = "none";
+                document.getElementById('hidden_date').style.display = "none";
+                document.getElementById('hidden_gender').style.display = "none";
+                document.getElementById('hidden_div_diseaseBased').style.display = "none";
+                document.getElementById('hidden_month').style.display = "block";
+
+
             } else {
                 document.getElementById('hidden_div').style.display = "none";
                 document.getElementById('hidden_date').style.display = "none";
                 document.getElementById('hidden_gender').style.display = "none";
                 document.getElementById('hidden_div_diseaseBased').style.display = "none";
+                document.getElementById('hidden_month').style.display = "none";
+
 
 
             }

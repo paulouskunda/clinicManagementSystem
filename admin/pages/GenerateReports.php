@@ -275,4 +275,12 @@ $title = 'SUMBU CLINIC';
        
 
  }  
+
+ //Clinical
+
+ else if ($getParam == 'clinicalAdmit'){
+        $_SESSION['startMonth'] = $_POST['startMonth'];
+        $_SESSION['endMonth'] = $_POST['endMonth'];
+            header("location: graph.php");
+  }
 ?>

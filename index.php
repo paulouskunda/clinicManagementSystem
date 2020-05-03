@@ -1,3 +1,6 @@
+<?php
+require 'includeFiles/Connection.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +13,14 @@
             <h1 align="center">SUNBI CLINIC RECORD MANAGEMENT SYSTEM</h1>
 
 		<h4 style="text-align: center;">LOGIN-SCREEN</h4>
+		 <?php
+		 	if (isset($_SESSION['message'])) {
+		 		# code...
+		 		echo '<p align="center" class="alert alert-warning">'.$_SESSION['message']."</p>";
+			 unset($_SESSION['message']);
+		 	}
+			 
+			?>
 		<form class="form-group" action="" method="POST">
 			<label>Staff Number:</label>
 			<input type="text" name="username" required placeholder="Staff Number" class="form-control">
@@ -21,12 +32,7 @@
 		</form>
 	</div>
     
-    <?php
-        if(isset($_SESSION['message'])){
-        echo '<div class="alert alert-success"> '.$_SESSION['message'].' </div>';
-        unset($_SESSION['message']);
-        }
-    ?>
+<!--  -->
 </div>
 </body>
 </html>
@@ -36,7 +42,7 @@
 if (isset($_POST['submit'])) {
 	# code...
 
-	require 'includeFiles/Connection.php';
+	
 
 	$staffNumber = mysqli_real_escape_string($con, $_POST['username']);
 	$password = mysqli_real_escape_string($con, $_POST['password']);
@@ -74,12 +80,21 @@ if (isset($_POST['submit'])) {
 			}else  {
 				# code...
               // echo "Please check the log in details.";
-                
+                $sqlAdmin = "SELECT * FROM admin WHERE username = '$staffNumber' AND password = '$password'";
+				$inner = mysqli_query($con, $sqlAdmin);
+				if (mysqli_num_rows($inner) > 0) {
+					# code...
+
+					while ($rows = mysqli_fetch_assoc($inner)) {
+						# code...
+						$_SESSION['admin'] = $staffNumber;
+						header('location: admin/');
+					}
+				}
 			}
 		}
 	} else {
-        echo 'Well;';
-       $_SESSION['message'] = 'Please check your login details';
+          $_SESSION['message'] = 'Please check your login details';
     }
 
 	// header("location: admin/");
