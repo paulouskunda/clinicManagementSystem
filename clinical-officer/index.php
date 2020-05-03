@@ -10,7 +10,7 @@ $query = mysqli_query($con, $sql);
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Clinic Record Management System || SUMBU Clinic</title>
+	<title>Clinic Record Management System || Sunbi Clinic</title>
 	<link rel="stylesheet" type="text/css" href="../style/css/bootstrap.min.css">
 </head>
 <body>

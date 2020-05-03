@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Clinic Record Management System || SUMBU Clinoc</title>
+	<title>Clinic Record Management System || Sunbi Clinoc</title>
 	<link rel="stylesheet" type="text/css" href="style/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container">
 	<div class="column" style="margin-left:20%; margin-right:20%"><br><br>
-            <h1 align="center">SUMBU CLINIC RECORD MANAGEMENT SYSTEM</h1>
+            <h1 align="center">SUNBI CLINIC RECORD MANAGEMENT SYSTEM</h1>
 
 		<h4 style="text-align: center;">LOGIN-SCREEN</h4>
 		<form class="form-group" action="" method="POST">

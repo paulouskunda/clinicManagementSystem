@@ -140,39 +140,27 @@
                             <textarea rows="6" class="form-control" name="coFindings" placeholder="What the clinical officer found from the patient"><?php echo $coFind; ?></textarea>
                         </div>
                         &nbsp;
+
                         <?php
 
-                            $labSQL = "SELECT labTech.testFor FROM labTech, activelog  WHERE labTech.aID = activelog.id ";
-                            if ($resultsLab = mysqli_query($con, $labSQL)) {
+                            $labSql = "SELECT * FROM labTech WHERE aID = '$activeID'";
+                            $results = mysqli_query($con, $labSql);
+                            if (mysqli_num_rows($results) > 0) {
+
                                 # code...
-<<<<<<< HEAD
-                                while ($rowsQu = mysqli_fetch_assoc($resultsLab)) {
-                                    # code...
-                                    echo '
-                                        <div class="col-md-12">
-                                        <label>Lab Test for <sub>(only feel this field if the patient is to be sent to the lab)</sub></label>
-                                        <input type="text" value="'.$rowsQu['testFor'].'" class="form-control" placeholder="Test the Patient for" name="testFor" readonly>
-                                         </div><br>';
-=======
-                                //find me
                                 while($labFetch = mysqli_fetch_assoc($results)){
                                         echo '<div class="col-md-12">
                                             <label>Lab Test Results</label>
                                             <input type="text" class="form-control" value="'.$labFetch['testFor'].'" placeholder="Test for" name="testFor" readonly>
                                             </div><br>';
->>>>>>> All Fixed I hope so, nigga
                                 }
-
-                                echo '
-                                    <div class="col-md-12">
-                                    <label>Lab Test for <sub>(only feel this field if the patient is to be sent to the lab)</sub></label>
-                                    <input type="text" class="form-control" placeholder="Test the Patient for" name="testFor">
-                                     </div><br>';
-                           
                             }else {
-                             }      
+                                    echo '<div class="col-md-12">
+                                            <label>Lab Test for</label>
+                                            <input type="text" class="form-control" placeholder="Test for" name="testFor">
+                                            </div><br>';
+                            }
                         ?>
-
                         <div class="col-md-12">
 
 
@@ -181,42 +169,16 @@
                             <!-- -->
                         </div>
                     </div><br>
+                     
+
                     <div class="col-md-12">
                         <label>Diagnosis</label>
                         <input type="text" class="form-control" placeholder="Diagnosis disease" name="possibleDisease">
                     </div><br>
                     <div class="col-md-12">
-<<<<<<< HEAD
-<<<<<<< HEAD
     
                         <label>Treatment </label>
                         <textarea rows="6" name="drugs" id="updateMe" class="form-control" placeholder="Treatment"></textarea>
-=======
-                        <?php 
-                            $sqlDrugs = "SELECT * FROM drugs";
-                            $result = mysqli_query($con, $sqlDrugs);
-                        
-                            
-                        ?>
-                        <h3>Pick the drugs</h3>
-                        <select id="getDrugID" class="form-control" onchange="accountSelect(this)">
-                            <?php
-                                
-                            while($rows = mysqli_fetch_assoc($result)){
-                                echo '<option value="'.$rows['drugName'].'">'.$rows['drugName'].'</option>';
-                            }
-                            ?>
-               
-                        </select>
-
-                        <br>
-                        <textarea rows="6" name="drugs" id="updateMe" class="form-control" placeholder="This will be updated with the selected items from the drop down"></textarea>
->>>>>>> Up to Date
-=======
-    
-                        <label>Treatment </label>
-                        <textarea rows="6" name="drugs" id="updateMe" class="form-control" placeholder="Treatment"></textarea>
->>>>>>> Master Paulous Changes - New Changes
                     </div><br>
 
                     <div class="col-md-6">
@@ -277,8 +239,7 @@
                                         <td>Date </td>
                                         <td>Disease Record</td>
                                         <td>Clinical Officer</td>
-                                        <td>Referral</td>
-                                        <!-- <td>View Details</td> -->
+                                      
                                     </thead>
                                     <tbody>
                                         <?php
@@ -289,7 +250,6 @@
                                                         <td>'.$rowP['cpDate'].'</td>
                                                         <td>'.$rowP['diseaseName'].'</td>
                                                         <td>'.$rowP['staffName'].'</td>
-                                                        <td>No</td>
                                                         
                                                     </tr>';
                                                 }
@@ -297,7 +257,7 @@
                                                 echo mysqli_error($con);
                                             }
                                         ?>
-<!-- <td><button>View</button></td> -->
+
                                     </tbody>
                                 </table>
                             </div>

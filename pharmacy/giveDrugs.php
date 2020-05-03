@@ -46,7 +46,7 @@ if(isset($_POST['finish'])){
     if(mysqli_query($con, $updateActivity)){
         $updateDrugs = "UPDATE drugsprescription SET status = 'done' WHERE id = '$dpID'";
         if(mysqli_query($con, $updateDrugs)){
-            $_SESSION['doneMessage'] = "Thanking for Visiting SUMBU Clinic, You local health center... Get well soon and stay blessed";
+            $_SESSION['doneMessage'] = "Thanking for Visiting Sunbi Clinic, You local health center... Get well soon and stay blessed";
             header('location: ../thankYou/thankyou.php');
         }else {
             echo mysqli_error($con);

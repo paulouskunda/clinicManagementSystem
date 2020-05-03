@@ -16,16 +16,17 @@ require '../fpdf/fpdf.php';
 //default margin : 10mm each side
 //writable horizontal : 219-(10*2)=189mm
 
-//create pdf object
-$pdf = new FPDF('P','mm','A4');
-//add new page
-$pdf->AddPage();
-//set font to arial, bold, 14pt
-$pdf->SetFont('Arial','B',14);
-
 $title = 'SUMBU CLINIC';
 
  if($getParam == 'allPatients'){
+
+		//create pdf object
+		$pdf = new FPDF('P','mm','A4');
+		//add new page
+		$pdf->AddPage();
+		//set font to arial, bold, 14pt
+		$pdf->SetFont('Arial','B',14);
+
         $startDate = $_POST['startDate'];
         $endDate  = $_POST['endDate'];
          	$pdf->Cell(130 ,5,'All Patients Count Admitted Between '.$startDate.' and '.$endDate,0,0);
@@ -85,6 +86,13 @@ $title = 'SUMBU CLINIC';
         $pdf->Output();
 
  } else if($getParam == 'diseaseBased'){
+ 			//create pdf object
+		$pdf = new FPDF('P','mm','A4');
+		//add new page
+		$pdf->AddPage();
+		//set font to arial, bold, 14pt
+		$pdf->SetFont('Arial','B',14);
+
  		$selectedDisease = $_POST['selectDisease'];
  		$pdf->Cell(130 ,5,'All Patients Count Who have had '.$selectedDisease,0,0);
         $pdf->Cell(59 ,5,'',0,1,'C');//end of line
@@ -141,6 +149,13 @@ $title = 'SUMBU CLINIC';
 
  }
  else if($getParam == 'diseaseCount'){
+ 			//create pdf object
+		$pdf = new FPDF('P','mm','A4');
+		//add new page
+		$pdf->AddPage();
+		//set font to arial, bold, 14pt
+		$pdf->SetFont('Arial','B',14);
+
  	  $startDate = $_POST['startDate'];
         $endDate  = $_POST['endDate'];
  		$pdf->Cell(130 ,5,'Disease History Between  '.$startDate.' and '.$endDate,0,0);
@@ -161,50 +176,8 @@ $title = 'SUMBU CLINIC';
         //make a dummy empty cell as a vertical spacer
         $pdf->Cell(189 ,10,'',0,1);//end of line
 
-<<<<<<< HEAD
-=======
-				
-				//invoice contents
-				$pdf->SetFont('Arial','B',12);
 
-				$pdf->Cell(60 ,5,'Patient Name',1,0);
-				$pdf->Cell(35,5,'Patient Number',1,0);
-				$pdf->Cell(50 ,5,'Staff Name',1,0);
-				$pdf->Cell(50 ,5,'Diagnosis',1,0);//end of line
-				$pdf->Cell(40,5,'CP Time Started ',1,0);
-				$pdf->Cell(40,5,'CP Time Ended',1,1);
-			
-				$pdf->Cell(275 ,5,'',1,1);
-				// $pdf->Cell(35,5,'',1,0);
-				// $pdf->Cell(50 ,5,'',1,0);
-				// $pdf->Cell(50 ,5,'',1,0);//end of line
-				// $pdf->Cell(40,5,'',1,0);
-				// $pdf->Cell(40,5,'',1,1);
-
-				$getAllStaff = "SELECT patients.fullname, patients.uniqueID, activeLog.cpTimeStarted, activeLog.cpTimeEnded, diseaseRecord.diseaseName, staff.staffName FROM staff, patients, activeLog, diseaseRecord WHERE activeLog.id = diseaseRecord.aid AND patients.uniqueID = diseaseRecord.pID AND staff.staffNumber = activeLog.coID ";
-				$getStaffQuery = mysqli_query($con, $getAllStaff);
-				$getStaffNum = mysqli_num_rows($getStaffQuery);
-
-				if ($getStaffNum > 0) {
-					# code...
-				
-					while ($getStaff = mysqli_fetch_assoc($getStaffQuery)) {
-						# code...
-						$staffFullName = $getStaff['staffName'];
-						$patientName = $getStaff['fullname'];
-						$diseaseName = $getStaff['diseaseName'];
-
-						$pdf->Cell(60,5,''.$patientName.'',1,0);
-						$pdf->Cell(35,5,''.$getStaff['uniqueID'],1,0,'L');
-						$pdf->Cell(50,5,''.$staffFullName.'',1,0);
-						$pdf->Cell(50,5,' '.$diseaseName.'',1,0,'L');
-						$pdf->Cell(40,5,''.$getStaff['cpTimeStarted'],1,0,'L');
-						$pdf->Cell(40,5,''.$getStaff['cpTimeEnded'],1,1,'L');//end of line
-					}
-				} else {
-				$pdf->Cell(270,5,'No data avaliable right now',1,1,L);
-				}
->>>>>>> Master Paulous Changes - New Changes
+// >>>>>>> Master Paulous Changes - New Changes
 
         //invoice contents
         $pdf->SetFont('Arial','B',12);
@@ -212,41 +185,34 @@ $title = 'SUMBU CLINIC';
         $pdf->Cell(90 ,5,'Disease Name',1,0);
         $pdf->Cell(90 ,5,'Count',1,1);
         
-        $getAllPatients = "SELECT 
-        	diseaserecord.diseaseName, COUNT(diseaserecord.diseaseName) AS TOTALNUMBER FROM diseaserecord, activelog
-			WHERE activelog.cpDate BETWEEN '$startDate' AND '$endDate' 
+        $getDiseaseCount = "SELECT 
+        	 diseaserecord.diseaseName, COUNT(diseaserecord.diseaseName) AS TOTALNUMBER FROM diseaserecord, activelog
+			WHERE activelog.cpDate BETWEEN '$startDate' AND '$endDate' AND diseaserecord.aID = activelog.id
 			GROUP BY diseaserecord.diseaseName ORDER BY  COUNT(diseaserecord.diseaseName) DESC";
-        $getPatientsQuery = mysqli_query($con, $getAllPatients);
-        $getPatientsNum = mysqli_num_rows($getPatientsQuery);
+        $getDiseaseCountQuery = mysqli_query($con, $getDiseaseCount);
+        $getDiseaseCountNum = mysqli_num_rows($getDiseaseCountQuery);
 
-        if ($getPatientsNum > 0) {
+        if ($getDiseaseCountNum > 0) {
             # code...
+            while ($diseaseRows = mysqli_fetch_assoc($getDiseaseCountQuery)) {
+            	# code...
 
-<<<<<<< HEAD
-            while ($getPatients = mysqli_fetch_assoc($getPatientsQuery)) {
-                # code...
-         
-=======
- 	$Explo = explode(",", $getID);
->>>>>>> Master Paulous Changes - New Changes
-
-                $pdf->Cell(90,5,''.$getPatients['diseaseName'].'',1,0);
-                $pdf->Cell(90,5,''.$getPatients['TOTALNUMBER'].'',1,1,'L');
+		        $pdf->Cell(90 ,5, $diseaseRows['diseaseName'],1,0);
+		        $pdf->Cell(90 ,5, $diseaseRows['TOTALNUMBER'],1,1);
             }
-        }
-
-
-<<<<<<< HEAD
-        $pdf->SetFont('Arial','',12);
-=======
-			$pdf->Cell(19 ,3,'PERSONAL REPORT ',0,0);//end of line
->>>>>>> Master Paulous Changes - New Changes
+		}
 
         //Numbers are right-aligned so we give 'R' after new line parameter
         $pdf->Output();
 
  } else if ($getParam == 'allStaff') {
- 	# code...
+ 		//create pdf object
+		$pdf = new FPDF('P','mm','A3');
+		//add new page
+		$pdf->AddPage();
+		//set font to arial, bold, 14pt
+		$pdf->SetFont('Arial','B',14);
+ 		# code...
  		$pdf->Cell(130 ,5,'',0,0);
         $pdf->Cell(59 ,5,'All Staff List Report',0,1);//end of line
 
@@ -270,36 +236,17 @@ $title = 'SUMBU CLINIC';
         //invoice contents
         $pdf->SetFont('Arial','B',12);
 
-<<<<<<< HEAD
         $pdf->Cell(50 ,5,'Full Name',1,0);
         $pdf->Cell(40 ,5,'Date of Birth',1,0);
         $pdf->Cell(40 ,5,'NRCNUMBER',1,0);//end of line
         $pdf->Cell(60,5,'Email Address',1,0);
-            $pdf->Cell(50,5,'Date Account Added',1,0);
+            $pdf->Cell(50,5,'Ttle',1,0);
         $pdf->Cell(34,5,'Staff Number',1,1);
 
         $getAllStaff = "SELECT * FROM staff ";
         $getStaffQuery = mysqli_query($con, $getAllStaff);
         $getStaffNum = mysqli_num_rows($getStaffQuery);
-=======
-			$pdf->Cell(60 ,5,'Patient Name',1,0);
-			$pdf->Cell(35,5,'Patient Number',1,0);
-			$pdf->Cell(50 ,5,'Staff Name',1,0);
-			$pdf->Cell(50 ,5,'Diagnosis',1,0);//end of line
-			$pdf->Cell(40,5,'CP Time Started ',1,0);
-			$pdf->Cell(40,5,'CP Time Ended',1,1);
-		
-			$pdf->Cell(275 ,5,'',1,1);
-		
 
-			$getAllStaff = "SELECT patients.fullname, patients.uniqueID, activeLog.cpTimeStarted, activeLog.cpTimeEnded, diseaseRecord.diseaseName, staff.staffName 
-            FROM staff, patients, activeLog, diseaseRecord 
-            WHERE activeLog.id = diseaseRecord.aid AND patients.uniqueID = diseaseRecord.pID AND staff.staffNumber = activeLog.coID AND patients.uniqueID = '".$Explo[0]."'";
-			$getStaffQuery = mysqli_query($con, $getAllStaff);
-			$getStaffNum = mysqli_num_rows($getStaffQuery);
->>>>>>> Master Paulous Changes - New Changes
-
-<<<<<<< HEAD
         if ($getStaffNum > 0) {
             # code...
 				
@@ -308,33 +255,12 @@ $title = 'SUMBU CLINIC';
                 $staffFullName = $getStaff['staffName'];
                 $staffDOB = $getStaff['staffDOB'];
                 $nrc = $getStaff['nrc'];
-=======
-			if ($getStaffNum > 0) {
-				# code...
-			
-				while ($getStaff = mysqli_fetch_assoc($getStaffQuery)) {
-					# code...
-					$staffFullName = $getStaff['staffName'];
-					$patientName = $getStaff['fullname'];
-					$diseaseName = $getStaff['diseaseName'];
-
-					$pdf->Cell(60,5,''.$patientName.'',1,0);
-					$pdf->Cell(35,5,''.$getStaff['uniqueID'],1,0,'L');
-					$pdf->Cell(50,5,''.$staffFullName.'',1,0);
-					$pdf->Cell(50,5,' '.$diseaseName.'',1,0,'L');
-					$pdf->Cell(40,5,''.$getStaff['cpTimeStarted'],1,0,'L');
-					$pdf->Cell(40,5,''.$getStaff['cpTimeEnded'],1,1,'L');//end of line
-				}
-			} else {
-				$pdf->Cell(270,5,'No data avaliable right now',1,1,'L');
-			}
->>>>>>> Up to Date
 
                 $pdf->Cell(50,5,''.$staffFullName.'',1,0);
                 $pdf->Cell(40,5,''.$staffDOB.'',1,0);
                 $pdf->Cell(40,5,' '.$nrc.'',1,0,'L');
                 $pdf->Cell(60,5,''.$getStaff['staffEmail'].'',1,0,'L');
-                $pdf->Cell(50,5,''.$getStaff['dateRegistered'],1,0,'L');
+                $pdf->Cell(50,5,''.$getStaff['staffTitle'],1,0,'L');
                 $pdf->Cell(34,5,''.ucfirst($getStaff['staffNumber']),1,1,'L');//end of line
             }
         }
@@ -345,175 +271,8 @@ $title = 'SUMBU CLINIC';
         //Numbers are right-aligned so we give 'R' after new line parameter
         $pdf->Output();
 
- }  else if ($getParam == "ageGroup") {
- 	# code...
 
- 	//Get the total count of all patients from the selected group.
- 	$getAgeLowest = $_POST['startAge'];
- 	$getAgeHighest = $_POST['endAge'];
+       
 
- 	$sqlCount = "SELECT COUNT(*) as total FROM patients WHERE age BETWEEN '$getAgeLowest' AND '$getAgeHighest'";
- 	$totalPeopleInTheGroup = null;
- 	$queryCount = mysqli_query($con, $sqlCount);
-
- 	while ($rowsCount = mysqli_fetch_assoc($queryCount)) {
- 		# code...
- 		$totalPeopleInTheGroup = $rowsCount['total'];
- 	}
-
-			$pdf->Cell(19 ,3,'AGE REPORT FOR PATIENTS BETWEEN '.$getAgeLowest.' AND '.$getAgeHighest,0,0);//end of line
-
- 	 		$pdf->Cell(130 ,5,'',0,1);
-			//set font to arial, regular, 12pt
-			// $pdf->SetFont('Arial',''.$title,12);
-
-			$pdf->Cell(130 ,5,'Generated By: Mercy',0,0);
-			$pdf->Cell(59 ,5,'',0,1);//end of line
-
-
-
-			$currentDate = date('d/m/Y');
-			$pdf->Cell(130 ,5,'[Kabwe,Zambia]',0,0);
-			$pdf->Cell(20 ,5,'Date',0,0);
-			$pdf->Cell(34 ,5,''.$currentDate.'',0,1);//end of line
-
-			$pdf->Cell(70,5,'Total patients with query info:[ '.$totalPeopleInTheGroup.' ]',0,1);
-
-
-			//make a dummy empty cell as a vertical spacer
-			$pdf->Cell(189 ,10,'',0,1);//end of line
-
-			
-			//invoice contents
-			$pdf->SetFont('Arial','B',12);
-
-			$pdf->Cell(60 ,5,'Patient Name',1,0);
-			$pdf->Cell(35,5,'Patient Number',1,0);
-			$pdf->Cell(30 ,5,'Age',1,0);
-			$pdf->Cell(25 ,5,'Gender',1,0);
-			$pdf->Cell(50 ,5,'Patient Next to kin',1,0);//end of line
-			$pdf->Cell(40,5,'Physical Address',1,0);
-			$pdf->Cell(40,5,'Date Added',1,1);
-		
-			$pdf->Cell(275 ,5,'',1,1);
-		
-
-			$getAllPatientsAgeGroup = "SELECT * FROM PATIENTS WHERE age BETWEEN '$getAgeLowest' AND '$getAgeHighest' ";
-			$getAllPatientsAgeGroupQuery = mysqli_query($con, $getAllPatientsAgeGroup);
-			$getStaffNum = mysqli_num_rows($getAllPatientsAgeGroupQuery);
-
-			if ($getStaffNum > 0) {
-				# code...
-			
-				while ($getAGPatient = mysqli_fetch_assoc($getAllPatientsAgeGroupQuery)) {
-					# code...
-				
-
-					$pdf->Cell(60,5,''.$getAGPatient['fullname'].'',1,0);
-					$pdf->Cell(35,5,''.$getAGPatient['uniqueID'],1,0,'L');
-					$pdf->Cell(30,5,''.$getAGPatient['age'].'',1,0);
-					$pdf->Cell(25,5,''.$getAGPatient['gender'].'',1,0);
-					$pdf->Cell(50,5,' '.$getAGPatient['nextToKin'].'',1,0,'L');
-					$pdf->Cell(40,5,''.$getAGPatient['physicalAddress'],1,0,'L');
-					$pdf->Cell(40,5,''.$getAGPatient['dateRegistered'],1,1,'L');//end of line
-				}
-			} else {
-				$pdf->Cell(280,5,'No data avaliable right now',1,1,'L');
-			}
-
-
-			$pdf->SetFont('Arial','',12);
-
-			//Numbers are right-aligned so we give 'R' after new line parameter
-			$pdf->Output();
-
- }else if ($getParam == "genderReport") {
- 	# code...
-
- 	//Get the total count of all patients from the selected group.
- 	$selectedGender = $_POST['selectedGender'];
- 	$getAgeHighest = $_POST['endAge'];
-
- 	$sqlCount = "SELECT COUNT(*) as total FROM patients WHERE gender = '$selectedGender'";
- 	$totalPeopleInTheGroup = null;
- 	$queryCount = mysqli_query($con, $sqlCount);
-     
-
- 	while ($rowsCount = mysqli_fetch_assoc($queryCount)) {
- 		# code...
- 		$totalPeopleInTheGroup = $rowsCount['total'];
- 	}
-
-			$pdf->Cell(19 ,3,'GENDER REPORT FOR ALL '.$selectedGender.' PATIENTS ',0,0);//end of line
-
- 	 		$pdf->Cell(130 ,5,'',0,1);
-			//set font to arial, regular, 12pt
-			// $pdf->SetFont('Arial',''.$title,12);
-
-			$pdf->Cell(130 ,5,'Generated By: Mercy',0,0);
-			$pdf->Cell(59 ,5,'',0,1);//end of line
-
-
-
-			$currentDate = date('d/m/Y');
-			$pdf->Cell(130 ,5,'[Kabwe,Zambia]',0,0);
-			$pdf->Cell(20 ,5,'Date',0,0);
-			$pdf->Cell(34 ,5,''.$currentDate.'',0,1);//end of line
-
-			$pdf->Cell(70,5,'Total patients with query info:[ '.$totalPeopleInTheGroup.' ]',0,1);
-
-
-			//make a dummy empty cell as a vertical spacer
-			$pdf->Cell(189 ,10,'',0,1);//end of line
-
-			
-			//invoice contents
-			$pdf->SetFont('Arial','B',12);
-
-			$pdf->Cell(60 ,5,'Patient Name',1,0);
-			$pdf->Cell(35,5,'Patient Number',1,0);
-			$pdf->Cell(30 ,5,'Age',1,0);
-			$pdf->Cell(25 ,5,'Gender',1,0);
-			$pdf->Cell(50 ,5,'Patient Next to kin',1,0);//end of line
-			$pdf->Cell(40,5,'Physical Address',1,0);
-			$pdf->Cell(40,5,'Date Added',1,1);
-		
-			$pdf->Cell(275 ,5,'',1,1);
-		
-
-			$getAllPatientsAgeGroup = "SELECT * FROM PATIENTS WHERE gender = '$selectedGender'";
-			$getAllPatientsAgeGroupQuery = mysqli_query($con, $getAllPatientsAgeGroup);
-			$getStaffNum = mysqli_num_rows($getAllPatientsAgeGroupQuery);
-
-			if ($getStaffNum > 0) {
-				# code...
-			
-				while ($getAGPatient = mysqli_fetch_assoc($getAllPatientsAgeGroupQuery)) {
-					# code...
-				
-
-					$pdf->Cell(60,5,''.$getAGPatient['fullname'].'',1,0);
-					$pdf->Cell(35,5,''.$getAGPatient['uniqueID'],1,0,'L');
-					$pdf->Cell(30,5,''.$getAGPatient['age'].'',1,0);
-					$pdf->Cell(25,5,''.$getAGPatient['gender'].'',1,0);
-					$pdf->Cell(50,5,' '.$getAGPatient['nextToKin'].'',1,0,'L');
-					$pdf->Cell(40,5,''.$getAGPatient['physicalAddress'],1,0,'L');
-					$pdf->Cell(40,5,''.$getAGPatient['dateRegistered'],1,1,'L');//end of line
-				}
-			} else {
-				$pdf->Cell(280,5,'No data avaliable right now',1,1,'L');
-			}
-
-
-			$pdf->SetFont('Arial','',12);
-
-			//Numbers are right-aligned so we give 'R' after new line parameter
-			$pdf->Output();
-
- } else if($getParam == "selectDisease"){
-      	# code...
-
- 	echo "Yes it works";
- }
-
+ }  
 ?>

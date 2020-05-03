@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Clinic Record Management System || SUMBU Clinic</title>
+	<title>Clinic Record Management System || Sunbi Clinic</title>
 	<link rel="stylesheet" type="text/css" href="../style/css/bootstrap.min.css">
 </head>
 <body>
@@ -53,7 +53,7 @@
 			?>
 			<nav>
 			</nav>
-			<h2 style="text-align: center;">WELCOME <strong> <?php echo $FullName; ?> </strong> TO THE SUMBU CLINIC MANAGEMENT SYSTEM</h2>
+			<h2 style="text-align: center;">WELCOME <strong> <?php echo $FullName; ?> </strong> TO THE SUNBI CLINIC MANAGEMENT SYSTEM</h2>
 
 			<form method="GET" class="forn-control" action="Results.php">
 				 <div class="input-group">
