@@ -145,6 +145,7 @@
                             $labSQL = "SELECT labTech.testFor FROM labTech, activelog  WHERE labTech.aID = activelog.id ";
                             if ($resultsLab = mysqli_query($con, $labSQL)) {
                                 # code...
+<<<<<<< HEAD
                                 while ($rowsQu = mysqli_fetch_assoc($resultsLab)) {
                                     # code...
                                     echo '
@@ -152,6 +153,14 @@
                                         <label>Lab Test for <sub>(only feel this field if the patient is to be sent to the lab)</sub></label>
                                         <input type="text" value="'.$rowsQu['testFor'].'" class="form-control" placeholder="Test the Patient for" name="testFor" readonly>
                                          </div><br>';
+=======
+                                //find me
+                                while($labFetch = mysqli_fetch_assoc($results)){
+                                        echo '<div class="col-md-12">
+                                            <label>Lab Test Results</label>
+                                            <input type="text" class="form-control" value="'.$labFetch['testFor'].'" placeholder="Test for" name="testFor" readonly>
+                                            </div><br>';
+>>>>>>> All Fixed I hope so, nigga
                                 }
 
                                 echo '
