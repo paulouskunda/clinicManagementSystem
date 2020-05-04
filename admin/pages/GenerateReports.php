@@ -58,10 +58,10 @@ $title = 'SUMBU CLINIC';
         $pdf->Cell(60 ,5,'Children Count',1,1);//end of line
         
         $getAllPatients = "SELECT 
-							(Select count(activelog.pUniqueID) from activelog, patients where patients.gender='Male' AND patients.uniqueID = activelog.pUniqueID AND activelog.cpDate BETWEEN '$startDate' AND '$endDate') AS Male,
-							(Select count(activelog.pUniqueID) from activelog, patients where patients.gender='Female' AND patients.uniqueID = activelog.pUniqueID AND activelog.cpDate BETWEEN '$startDate' AND '$endDate') AS Female,
-							(Select count(activelog.pUniqueID) from activelog, patients where patients.age < 18 AND patients.uniqueID = activelog.pUniqueID AND activelog.cpDate BETWEEN '$startDate' AND '$endDate') AS Children,
-							COUNT(activelog.pUniqueID) AS TOTAL FROM activelog WHERE activelog.cpDate BETWEEN '$startDate' AND '$endDate'
+							(Select count(DISTINCT(activelog.pUniqueID)) from activelog, patients where patients.gender='Male' AND patients.uniqueID = activelog.pUniqueID AND activelog.cpDate BETWEEN '$startDate' AND '$endDate') AS Male,
+							(Select count(DISTINCT(activelog.pUniqueID)) from activelog, patients where patients.gender='Female' AND patients.uniqueID = activelog.pUniqueID AND activelog.cpDate BETWEEN '$startDate' AND '$endDate') AS Female,
+							(Select count(DISTINCT(activelog.pUniqueID)) from activelog, patients where patients.age < 18 AND patients.uniqueID = activelog.pUniqueID AND activelog.cpDate BETWEEN '$startDate' AND '$endDate') AS Children,
+							COUNT(DISTINCT(activelog.pUniqueID)) AS TOTAL FROM activelog WHERE activelog.cpDate BETWEEN '$startDate' AND '$endDate'
 							";
         $getPatientsQuery = mysqli_query($con, $getAllPatients);
         $getPatientsNum = mysqli_num_rows($getPatientsQuery);
@@ -121,9 +121,9 @@ $title = 'SUMBU CLINIC';
         $pdf->Cell(60 ,5,'Children Count',1,1);//end of line
         
         $getAllPatients = "SELECT 
-						(Select count(diseaserecord.pID) from diseaserecord, patients where patients.gender='Male' AND patients.uniqueID = diseaserecord.pID  AND diseaserecord.diseaseName = '$selectedDisease') AS Male,
-						(Select count(diseaserecord.pID) from diseaserecord, patients where patients.gender='Female' AND patients.uniqueID = diseaserecord.pID  AND diseaserecord.diseaseName = '$selectedDisease') AS Female,
-						(Select count(diseaserecord.pID) from diseaserecord, patients where patients.age < 18 AND patients.uniqueID = diseaserecord.pID AND diseaserecord.diseaseName = '$selectedDisease' ) AS Children
+						(Select count(DISTINCT(diseaserecord.pID)) from diseaserecord, patients where patients.gender='Male' AND patients.uniqueID = diseaserecord.pID  AND diseaserecord.diseaseName = '$selectedDisease') AS Male,
+						(Select count(DISTINCT(diseaserecord.pID)) from diseaserecord, patients where patients.gender='Female' AND patients.uniqueID = diseaserecord.pID  AND diseaserecord.diseaseName = '$selectedDisease') AS Female,
+						(Select count(DISTINCT(diseaserecord.pID)) from diseaserecord, patients where patients.age < 18 AND patients.uniqueID = diseaserecord.pID AND diseaserecord.diseaseName = '$selectedDisease' ) AS Children
 						";
         $getPatientsQuery = mysqli_query($con, $getAllPatients);
         $getPatientsNum = mysqli_num_rows($getPatientsQuery);
