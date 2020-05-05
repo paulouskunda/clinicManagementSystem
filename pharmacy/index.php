@@ -17,6 +17,37 @@ $query = mysqli_query($con, $sql);
 
 	<!-- Align on the center -->
 	<div class="container">
+		    <?php
+
+                    if (!isset($_SESSION['pharmacist'])) {
+                # code...
+                    header('Location: ../');
+                    }
+
+                    $getName = $_SESSION['pharmacist'];
+                    $FullName = null;
+                    $isDefault = null;
+
+                    $sql = "SELECT * FROM staff WHERE staffNumber = '$getName'";
+
+                    $runMe = mysqli_query($con,$sql);
+
+                    while ($rows = mysqli_fetch_assoc($runMe)) {
+                        # code...
+                        $FullName = $rows['staffName'];
+                        $isDefault = $rows['isDefaultChanged'];
+                        $_SESSION['password_changed'] = $isDefault;
+
+                    }
+                
+
+                if ($isDefault == 0) {
+                    # code...
+                    echo "<h3 class='alert alert-info'> We recommend you change your default password in <a href='../views/Settings.php'>settings</a>.</h3>";
+                }
+    ?>
+    
+        <p align="left" style="margin-top: 0.5%"> <i class="fa fa-warning"></i><a href="../logout.php">Logout</a></p>
 		<div class="row">
 			<h2 style="text-align: center;">WELCOME NAME OF THE SUNBI CLINIC</h2>
 			<table class="table">

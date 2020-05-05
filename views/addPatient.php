@@ -32,7 +32,7 @@
 
 			</div>
 			<br><br><br>
-				<div class="col-sm-12">
+				<div class="col-sm-6">
 					<label>Gender</label>
 					<select class="form-control" name="gender">
 						<option value="Male">Male</option>
@@ -59,10 +59,16 @@
 				<br>
 				<label>Next to Kin</label>	
 				<input type="text" name="nextKin" placeholder="Next to Kin" class="form-control">
+			</div><br>
+			<br><br>
+			<div class="col-sm-6"><br>
+				<label>Next to kin <sup>Next to Kin contact (married people and other age group)</sup></label>
+				<input type="text" name="nextKinContact" placeholder="Phone Number" class="form-control">
 			</div>
 			<br>
 			<br><br><br>
 			<hr>
+			<br>
 			<div class="col-sm-12">
 				<input type="submit" name="patientSubmit" value="Add Patient" class="form-control btn btn-primary" style="width: 20%;">
 			</div>

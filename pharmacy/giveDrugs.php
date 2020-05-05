@@ -64,8 +64,10 @@ if(isset($_POST['finish'])){
 </head>
 <body>
 <div class="container">
+
 	<div class="rows">
         <br><br>
+
 		<h4>Patient Name: <strong><?php echo $getName; ?></strong> Attended to by Clincial Officer: <strong> <?php echo $getStaffName; ?></strong></h4>
 		<form action="" method="POST">
         <input name="aid" value="<?php echo $activityID; ?>" hidden="true"/>

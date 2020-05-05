@@ -15,6 +15,7 @@ if (isset($_POST['patientSubmit'])) {
 	$address = mysqli_real_escape_string($con, $_POST['address']);
 	$nextToKin = mysqli_real_escape_string($con, $_POST['nextKin']);
 	$phoneNumber = mysqli_real_escape_string($con, $_POST['phoneNumber']);
+	$nextKinContact = mysqli_real_escape_string($con, $_POST['nextKinContact']);
 	$pID = getNewID('P','patients');
     $gender = mysqli_real_escape_string($con, $_POST['gender']);
 
@@ -40,7 +41,7 @@ if (isset($_POST['patientSubmit'])) {
     }else {
         $age = date('Y-m-d') - $dob;
 
-	$sql = "INSERT INTO patients(fullname, dob, nrc,gender, phoneNumber,physicalAddress,nextToKin,uniqueID,age,dateRegistered) VALUES ('$fullName','$dob','$nrc','$gender','$phoneNumber','$address','$nextToKin','$pID','$age','$timestamp') ";
+	$sql = "INSERT INTO patients(fullname, dob, nrc,gender, phoneNumber,physicalAddress,nextToKin, nextToKinNumber, uniqueID,age,dateRegistered) VALUES ('$fullName','$dob','$nrc','$gender','$phoneNumber','$address','$nextToKin', '$nextKinContact', '$pID', '$age', '$timestamp') ";
 
 	if (RunMysqliQuery($con, $sql)) {
 		# code...
@@ -49,7 +50,7 @@ if (isset($_POST['patientSubmit'])) {
 		header('location: ../views/viewPage.php');
 	} else {
 		echo "Error: "+mysqli_error($con);
-        $_SESSION['message'] = 'We encounter some errors';
+        $_SESSION['message'] = 'We encounter some errors '.mysqli_error($con);
         header("location: ../staff");
 
 	}

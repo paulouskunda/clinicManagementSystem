@@ -7,6 +7,8 @@ if (isset($_SESSION['staffID'])) {
 
    $_SESSION['error_message'] = null;
    $_SESSION['success_message'] = null;
+        $staffID = $_SESSION['staffID'];
+
    // $email = $_SESSION['email'];
     
      require '../includeFiles/header.php';
@@ -15,11 +17,12 @@ if (isset($_SESSION['staffID'])) {
     $oldNeedToChangePassWord = "";
 
 
+
+
     if (isset($_POST['oldSubmit'])) {
     	# code...
     	
     	$oldPass = $_POST['oldPassword'];
-    	$staffID = $_SESSION['staffID'];
     	$checkSQL = "SELECT * FROM staff where id ='$staffID'";
     	$checkMysql = mysqli_query($con, $checkSQL);
     	if ($checkMysql) {
@@ -35,14 +38,10 @@ if (isset($_SESSION['staffID'])) {
 					// echo $oldNeedToChangePassWord;
     			} else {
     				$_SESSION['error_message'] = "Wrong Password";
+
     			}
-    			
-
-    		}
-    		
+    		}	
     	} 
-
-
     	// $num
 
     	// $_SESSION['password_changed'] = 0;
@@ -57,7 +56,9 @@ if (isset($_SESSION['staffID'])) {
 
     	 	if ($new_pass == $confirm_pass) {
     	 		# code...
-    	 	
+    	 	 
+                //hash the new password 
+                // $new_pass = md5($new_pass);
 
 
 	    		if ($new_pass != $old) {
@@ -108,10 +109,28 @@ if (isset($_SESSION['staffID'])) {
 </head>
 <body>
 	<h4 style="background-color: #000; color: #fff">
+        <?php
+        $goBackTo = null;
 
+        if (strpos($staffID, "CO")) {
+            # code...
+            $goBackTo = '../clinical-officer/';
+        } else if (strpos($staffID, "N")) {
+            # code...
+             $goBackTo = '../staff/';
 
-        
-			<a href="index.php" style="margin: 2%;" class="btn btn-primary">DASHBOARD</a>
+        } else if (strpos($staffID, "PH")) {
+            # code...
+            $goBackTo = '../pharmacy/';
+
+        }else if (strpos($staffID, "LT")) {
+            # code...
+            $goBackTo = '../labTech/';
+
+        }
+
+        ?>
+		<a href="<?php echo $goBackTo; ?>" style="margin: 1%;" class="btn btn-primary">DASHBOARD</a>
 		<span style="text-align: center;">User <i class="fa fa-lock"></i> Password Management-Settings</span></h4>
 	<div class="col-sm-4"></div>
 	<div class="col-sm-4">
@@ -122,34 +141,24 @@ if (isset($_SESSION['staffID'])) {
 	<div class="col-sm-4"></div>
 	<?php
 
-	 if ($_SESSION['error_message'] != null) {
+	 if (isset($_SESSION['error_message'])) {
 			# code...
-			echo "<div class='row'>
-					<div class='col-sm-4'></div>";
-			echo "<div class='col-sm-4'>
-					<h4 class='alert alert-danger'><i class='fa fa-warning'></i> ".$_SESSION['error_message']."</h4>
-				 </div>";
-			echo "<div class='col-sm-4'></div>
-				</div>";
+		
+			echo "<h4 class='alert alert-danger'  style='margin-left:30%; margin-right:30%'><i class='fa fa-warning'></i> ".$_SESSION['error_message']."</h4>";
+
 
 			unset($_SESSION['error_message']);
 		}
-		else if ($_SESSION['success_message'] != null) {
+		else if (isset($_SESSION['success_message'])) {
 			# code...
-			echo "<div class='row'>
-					<div class='col-sm-4'></div>";
-			echo "<div class='col-sm-4'>
-					<h4 class='alert alert-success'><i class='fa fa-success'></i> ".$_SESSION['success_message']."</h4>
-				 </div>";
-			echo "<div class='col-sm-4'></div>
-				</div>";
+		      echo "<h4 class='alert alert-success' style='margin-left:30%; margin-right:30%'><i class='fa fa-success'></i> ".$_SESSION['success_message']."</h4>";
 
 			unset($_SESSION['success_message']);
 		}
 	?>
    <!-- CHANGE PASSWORD -->
      <?php
-                if ($_SESSION['password_changed'] == 0) {
+            if ($_SESSION['password_changed'] == 0) {
                     # code...
                
                	// $checkOldPassword

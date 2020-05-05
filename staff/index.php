@@ -11,6 +11,11 @@
 		<?php
 			require '../includeFiles/Connection.php';
 
+			if (!isset($_SESSION['nurse'])) {
+				# code...
+				header('Location: ../');
+			}
+
 			$getName = $_SESSION['nurse'];
 			$FullName = null;
 			$isDefault = null;
@@ -23,6 +28,7 @@
 				# code...
 				$FullName = $rows['staffName'];
 				$isDefault = $rows['isDefaultChanged'];
+				$_SESSION['password_changed'] = $isDefault;
 
 			}
 
@@ -53,6 +59,7 @@
 			?>
 			<nav>
 			</nav>
+			<p align="left" style="margin-top: 0.5%"> <i class="fa fa-warning"></i><a href="../logout.php">Logout</a></p>
 			<h2 style="text-align: center;">WELCOME <strong> <?php echo $FullName; ?> </strong> TO THE SUNBI CLINIC MANAGEMENT SYSTEM</h2>
 
 			<form method="GET" class="forn-control" action="Results.php">
@@ -60,7 +67,8 @@
             <input name="searchtext" placeholder="Search" value="" class="form-control" required="" type="text">
             <span class="input-group-btn">
                <button class="btn btn-default" name="search" type="submit" id="addressSearch">
-                   <span class="icon-search"></span>
+                  <i class="fa fa-search" aria-hidden="true"></i> Search
+
                </button>
             </span>
         </div>

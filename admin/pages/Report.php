@@ -1,6 +1,10 @@
 <?php
 
-        require '../../includeFiles/Connection.php';
+require '../../includeFiles/Connection.php';
+ if (!isset($_SESSION['admin'])) {
+     # code...
+    header('location:../index.php');
+ }
 
 ?>
 <!DOCTYPE html>
@@ -48,7 +52,7 @@
                             <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                     
-                                <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>Logout</a>
+                                <a class="dropdown-item" href="logout.php"><i class="fas fa-power-off mr-2"></i>Logout</a>
                             </div>
                         </li>
                     </ul>

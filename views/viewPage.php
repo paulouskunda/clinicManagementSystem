@@ -73,8 +73,10 @@ if (isset($_SESSION['pID'])) {
 					<p class="card-text"><?php echo $rows['dob'].' <br> '.$rows['phoneNumber'].' <br> '.$rows['physicalAddress']; ?></p>
 					<form method="POST" action="">
 						<input type="text" name="uniqueID" hidden="" value="<?php echo $pID; ?>">
-						<input type="text" name="bpPressure" placeholder="BP">
-						<input type="text" name="temp" placeholder="">
+						<label>Blood Pressure Readings</label>
+						<input type="text" class="form-control" style="width: 20%" name="bpPressure" placeholder="BP"><br>
+						<label>Temperature Readings</label>
+						<input type="text" name="temp"  class="form-control" style="width: 20%" placeholder="Temperature"><br>
 						<button  name="activeButton" class="btn btn-primary">Start Clinic Process</button>
 					</form>
 					<?php

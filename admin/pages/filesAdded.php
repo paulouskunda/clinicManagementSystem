@@ -35,9 +35,11 @@ if (isset($_POST['patientSubmit'])) {
 		# code...
 		echo "It worked";
 		$_SESSION['pID'] = $pID;
-		$_SESSION['message'] = "Patient Was added successfully";
+		$_SESSION['success_message'] = "Patient Was added successfully";
 		header('location: addPatient.php');
 	} else {
+		$_SESSION['error_message'] = "Patient wasn't added ".mysqli_error($con);
+		header('location: addPatient.php');
 		echo "Error: "+mysqli_error($con);
 	}
 
@@ -67,6 +69,7 @@ if (isset($_POST['patientSubmit'])) {
 		$staffNumber = getNewID('LT','staff');
 	}
 
+	$hashPassword = md5("1234");
 
 	$fullName = '';
 
@@ -77,15 +80,30 @@ if (isset($_POST['patientSubmit'])) {
 	} else {
 		$fullName = $firstName." ".$lastName;
 	}
+	
+	//check if the staff with the provided nrc is in the system already
+	$selectQuery = "SELECT * FROM staff WHERE nrc = '$nrc'";
+    $mysqlResult = mysqli_query($con, $selectQuery);
+    if(mysqli_num_rows($mysqlResult) == 1){
+        echo 'Staff entered is already a staff';
+        $_SESSION['error_message'] = 'Staff Already exisits with the same NRC "'.$nrc.'"';
+        header('location: addStaff.php');
+    }else {
 
-	$sql = "INSERT INTO staff(staffName,staffNumber,staffAddress, staffTitle, staffEmail,nrc,staffDOB,password) VALUES ('$fullName','$staffNumber','$address','$title','$email','$nrc','$dob','1234')";
-		
-	if (RunMysqliQuery($con, $sql)) {
-		# code...
-		echo "It worked";
-	} else {
-		echo "Nah";
-	}
+		$sql = "INSERT INTO staff(staffName,staffNumber,staffAddress, staffTitle, staffEmail,nrc,staffDOB,password) VALUES ('$fullName','$staffNumber','$address','$title','$email','$nrc','$dob','$hashPassword')";
+			
+		if (RunMysqliQuery($con, $sql)) {
+			# code...
+			echo "It worked";
+			$_SESSION['success_message'] = "".$firstName." was successfully added";
+			header('location: addStaff.php');
+		} else {
+			$_SESSION['error_message'] = "Sorry staff not add, try again later.";
+			header('location: addStaff.php');
+			echo "Nah";
+		}
+    }
+
 
 
 
