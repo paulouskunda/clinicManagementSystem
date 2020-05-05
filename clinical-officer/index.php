@@ -15,6 +15,12 @@ $query = mysqli_query($con, $sql);
 </head>
 <body>
 	<?php
+			if (!isset($_SESSION['co'])) {
+				# code...
+				header('Location: ../');
+			}
+
+			
 			$getName = $_SESSION['co'];
 			$FullName = null;
 			$isDefault = null;
@@ -27,6 +33,7 @@ $query = mysqli_query($con, $sql);
 				# code...
 				$FullName = $rows['staffName'];
 				$isDefault = $rows['isDefaultChanged'];
+				$_SESSION['password_changed'] = $isDefault;
 
 			}
 

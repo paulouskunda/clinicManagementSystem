@@ -1,11 +1,35 @@
 <?php
+
     require '../../includeFiles/Connection.php';
 
-     if (!isset($_SESSION['admin'])) {
-         # code...
-        header('location:../index.php');
-     }
+    if (isset($_POST['adminAdd'])) {
+        # code...
+
+        $username = trim(mysqli_real_escape_string($con, $_POST['username']));
+        $password = trim(mysqli_real_escape_string($con, $_POST['password']));
+        $confirm_password = trim(mysqli_real_escape_string($con, $_POST['confirm_password']));
+
+        if ($password == $confirm_password) {
+            # code...
+
+            $hashedPassword = md5($password);
+
+            $sql = "INSERT INTO admin(username, password) VALUES ('$username', '$hashedPassword')";
+            if (mysqli_query($con, $sql)) {
+                # code...
+                $_SESSION['success_message'] = 'Admin Added Successfully';
+
+            }else {
+                $_SESSION['error_message'] = 'Admin not added '.mysqli_error($con);
+            }
+        }else{
+            $_SESSION['error_message'] = 'Passwords don\'t match';
+
+        }
+    }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +38,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Add Patients</title>
+    <title>Add Admin</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
     <link href="../assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
@@ -93,7 +117,7 @@
                                 <div id="submenu-4" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="addAdmin.php">Add Admin</a>
+                                            <a class="nav-link" href="#">Add Admin</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="addPatients.php">Add Patient</a>
@@ -140,14 +164,14 @@
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="page-header">
-                            <h2 class="pageheader-title">Add Patients</h2>
+                            <h2 class="pageheader-title">Add Admin</h2>
                            
                             <div class="page-breadcrumb">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
                                         <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Forms</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Add Patients</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Add Admin</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -167,54 +191,43 @@
                         <!-- ============================================================== -->
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="card">
-                                <h5 class="card-header">Add Patients</h5>
+                                <h5 class="card-header">Add Admin</h5>
+
+                                <?php
+
+                                    if (isset($_SESSION['success_message'])) {
+                                        # code...
+                                        echo '<p class="alert alert-success">'.$_SESSION['success_message'].'</p>';
+                                        unset($_SESSION['success_message']);
+                                    }else if (isset($_SESSION['error_message'])) {
+                                        # code...
+                                        echo '<p class="alert alert-warning">'.$_SESSION['error_message'].'</p>';
+                                        unset($_SESSION['error_message']);
+                                        # code...
+                                    }
+                                ?>
+
                                 <div class="card-body">
-                                    <form class="form-group" action="filesAdded.php" method="POST">
+                                    <form class="form-group" action="" method="POST">
                                         <div class="col-sm-12">
-                                            <label>First Name</label>
-                                            <input type="text" name="firstName" placeholder="First-Name" class="form-control">
+                                            <label>Username</label>
+                                            <input type="text" name="username" placeholder="Username" class="form-control">
 
                                         </div>
                                         <div class="col-sm-12">
-                                            <label>Last Name</label>
-                                            <input type="text" name="lastName" placeholder="Last-Name" class="form-control">
+                                            <label>Password</label>
+                                            <input type="password" name="password" placeholder="*****" class="form-control">
+
+                                        </div> 
+                                         <div class="col-sm-12">
+                                            <label>Confirm Password</label>
+                                            <input type="password" name="confirm_password" placeholder="*****" class="form-control">
 
                                         </div> 
                                         <br>
-                                        <div class="col-sm-12">
-                                            <label>Other Name</label>
-                                            <input type="text" name="otherName" placeholder="Other-Name [Middle Name]" class="form-control">
-
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <label>Date of Birth</label>
-                                            <input type="date" name="dob" placeholder="Date of Birth" class="form-control">
-
-                                        </div>
-                                        <br>
-                                        <div class="col-sm-12">
-                                            <label>NRC</label>
-                                            <input type="text" name="nrc" placeholder="Nrc Number" class="form-control">
-
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <label>Address</label>
-                                            <input type="text" name="address" placeholder="Address" class="form-control">
-
-                                        </div>
-                                        <br>
-                                        <div class="col-sm-12">
-                                            <label>Phone Number</label>
-                                            <input type="number" name="phoneNumber" placeholder="Phone Number" class="form-control">
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <label>Next to Kin</label>
-                                            <input type="text" name="nextKin" placeholder="Next to Kin" class="form-control">
-
-                                        </div>
-                                        <br>
-                                        <br><br>
-                                        <input type="submit" name="patientSubmit" value="Add Patient" class="form-control btn btn-primary" style="width: 20%;">
+                                        
+                                      
+                                       <input type="submit" name="adminAdd" value="Add Admin" class="form-control btn btn-primary" style="width: 20%;">
 
                                     </form>
                                                                 

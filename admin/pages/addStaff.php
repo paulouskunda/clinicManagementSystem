@@ -14,7 +14,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Add Patients</title>
+    <title>Add Staff</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
     <link href="../assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
@@ -48,13 +48,7 @@
                         <li class="nav-item dropdown nav-user">
                             <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
-                                <div class="nav-user-info">
-                                    <h5 class="mb-0 text-white nav-user-name">John Abraham</h5>
-                                    <span class="status"></span><span class="ml-2">Available</span>
-                                </div>
-                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>Logout</a>
+                                <a class="dropdown-item" href="logout.php   "><i class="fas fa-power-off mr-2"></i>Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -99,7 +93,7 @@
                                             <a class="nav-link" href="addPatients.php">Add Patient</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="addStaff.php">Add Staff</a>
+                                            <a class="nav-link" href="#">Add Staff</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -140,14 +134,14 @@
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="page-header">
-                            <h2 class="pageheader-title">Add Patients</h2>
+                            <h2 class="pageheader-title">Add Staff</h2>
                            
                             <div class="page-breadcrumb">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
                                         <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Forms</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Add Patients</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Add Staff</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -167,7 +161,21 @@
                         <!-- ============================================================== -->
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="card">
-                                <h5 class="card-header">Add Patients</h5>
+                                <h5 class="card-header">Add Staff</h5>
+
+                                <?php
+
+                                    if (isset($_SESSION['success_message'])) {
+                                        # code...
+                                        echo '<p class="alert alert-success">'.$_SESSION['success_message'].'</p>';
+                                        unset($_SESSION['success_message']);
+                                    }else if (isset($_SESSION['error_message'])) {
+                                        # code...
+                                        echo '<p class="alert alert-warning">'.$_SESSION['error_message'].'</p>';
+                                        unset($_SESSION['error_message']);
+                                        # code...
+                                    }
+                                ?>
                                 <div class="card-body">
                                     <form class="form-group" action="filesAdded.php" method="POST">
                                         <div class="col-sm-12">
@@ -204,17 +212,31 @@
                                         </div>
                                         <br>
                                         <div class="col-sm-12">
-                                            <label>Phone Number</label>
-                                            <input type="number" name="phoneNumber" placeholder="Phone Number" class="form-control">
+                                            <label>Email Address</label>
+                                             <input type="email" name="email" placeholder="Email Address" class="form-control">
+
                                         </div>
                                         <div class="col-sm-12">
-                                            <label>Next to Kin</label>
-                                            <input type="text" name="nextKin" placeholder="Next to Kin" class="form-control">
+                                            <label>Staff Title</label>
+                                            <select name="title" class="form-control">
+                                                <option id="clinic-officer">
+                                                    Clinic Officer
+                                                </option>
+                                                <option id="nurse">
+                                                    Nurse
+                                                </option>
+                                                <option id="pharmacist">
+                                                    Pharmacist
+                                                </option>
+                                                <option id="labtech">
+                                                    Lab Tech
+                                                </option>
+                                            </select>   
 
                                         </div>
                                         <br>
                                         <br><br>
-                                        <input type="submit" name="patientSubmit" value="Add Patient" class="form-control btn btn-primary" style="width: 20%;">
+                                       <input type="submit" name="staffSubmit" value="Add Staff" class="form-control btn btn-primary" style="width: 20%;">
 
                                     </form>
                                                                 

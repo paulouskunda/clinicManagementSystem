@@ -3,7 +3,6 @@
 require '../includeFiles/Connection.php';
 require '../includeFiles/functions.php';
 
-$timestamp = date("Y-m-d H:i:s"); 
 
 if (isset($_POST['patientSubmit'])) {
 	# code...
@@ -70,6 +69,8 @@ if (isset($_POST['patientSubmit'])) {
 	$email = mysqli_real_escape_string($con, $_POST['email']);
 	$title = mysqli_real_escape_string($con, $_POST['title']);
 	$staffNumber = '';
+	$timestamp = date("Y-m-d H:i:s"); 
+
 
  	if ($title == 'Clinic Officer') {
 		# code...
@@ -111,7 +112,7 @@ if (isset($_POST['patientSubmit'])) {
             header('location: ../admin/pages/addStaff.php');
 
         } else {
-             $_SESSION['errorMessage'] = "An error was encountered, try again later";
+             $_SESSION['errorMessage'] = "An error was encountered, try again later ".mysqli_error($con);
              header('location: ../admin/pages/addStaff.php');
 
         }

@@ -1,6 +1,10 @@
 <?php
-require '../../includeFiles/Connection.php';
+    require '../../includeFiles/Connection.php';
 
+     if (!isset($_SESSION['admin'])) {
+         # code...
+        header('location:../index.php');
+     }
 ?>
     <!DOCTYPE html>
 <html lang="en">

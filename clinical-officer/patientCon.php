@@ -5,6 +5,9 @@
 	<?php 
 	//Obtain the connection 
 	require_once '../includeFiles/Connection.php';
+    if (!isset($_SESSION['co'])) {
+      header('Location: ../');
+    }
 
 	//get the passed uniqueID
 	$pID = $_GET['id'];

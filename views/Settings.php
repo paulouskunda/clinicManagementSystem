@@ -2,12 +2,14 @@
 
     require '../includeFiles/Connection.php';
 
-if (isset($_SESSION['staffID'])) {
+if (isset($_SESSION['stuffType'])) {
             # code...
 
-   $_SESSION['error_message'] = null;
-   $_SESSION['success_message'] = null;
-        $staffID = $_SESSION['staffID'];
+    $_SESSION['error_message'] = null;
+    $_SESSION['success_message'] = null;
+    $staffID = $_SESSION['staffID'];
+
+    $getMe = $_SESSION['stuffType'];
 
    // $email = $_SESSION['email'];
     
@@ -22,7 +24,7 @@ if (isset($_SESSION['staffID'])) {
     if (isset($_POST['oldSubmit'])) {
     	# code...
     	
-    	$oldPass = $_POST['oldPassword'];
+    	$oldPass = md5($_POST['oldPassword']);
     	$checkSQL = "SELECT * FROM staff where id ='$staffID'";
     	$checkMysql = mysqli_query($con, $checkSQL);
     	if ($checkMysql) {
@@ -58,7 +60,7 @@ if (isset($_SESSION['staffID'])) {
     	 		# code...
     	 	 
                 //hash the new password 
-                // $new_pass = md5($new_pass);
+                $new_pass = md5($new_pass);
 
 
 	    		if ($new_pass != $old) {
@@ -110,25 +112,21 @@ if (isset($_SESSION['staffID'])) {
 <body>
 	<h4 style="background-color: #000; color: #fff">
         <?php
+
+
         $goBackTo = null;
-
-        if (strpos($staffID, "CO")) {
-            # code...
-            $goBackTo = '../clinical-officer/';
-        } else if (strpos($staffID, "N")) {
-            # code...
-             $goBackTo = '../staff/';
-
-        } else if (strpos($staffID, "PH")) {
-            # code...
-            $goBackTo = '../pharmacy/';
-
-        }else if (strpos($staffID, "LT")) {
-            # code...
+        $staffType = $_SESSION['stuffType'];
+        // echo $staffID;
+        if (substr($staffType, 0, strlen('C')) === 'C') {
+             $goBackTo = '../clinical-officer/';
+        } else if (substr($staffType, 0, strlen('N')) === 'N') {
+              $goBackTo = '../staff/';
+        } else  if (substr($staffType, 0, strlen('P')) === 'P') {
+             $goBackTo = '../pharmacy/';
+        }else  if (substr($staffType, 0, strlen('L')) === 'L') {
             $goBackTo = '../labTech/';
-
         }
-
+        
         ?>
 		<a href="<?php echo $goBackTo; ?>" style="margin: 1%;" class="btn btn-primary">DASHBOARD</a>
 		<span style="text-align: center;">User <i class="fa fa-lock"></i> Password Management-Settings</span></h4>
@@ -205,6 +203,11 @@ if (isset($_SESSION['staffID'])) {
     		
    	</div>
 </div>
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
 </body>
 </html>
 <?php

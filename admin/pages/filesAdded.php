@@ -3,6 +3,7 @@
 require '../../includeFiles/Connection.php';
 require '../../includeFiles/functions.php';
 
+$timestamp = date("Y-m-d H:i:s"); 
 
 
 if (isset($_POST['patientSubmit'])) {
@@ -90,7 +91,7 @@ if (isset($_POST['patientSubmit'])) {
         header('location: addStaff.php');
     }else {
 
-		$sql = "INSERT INTO staff(staffName,staffNumber,staffAddress, staffTitle, staffEmail,nrc,staffDOB,password) VALUES ('$fullName','$staffNumber','$address','$title','$email','$nrc','$dob','$hashPassword')";
+		$sql = "INSERT INTO staff(staffName,staffNumber,staffAddress, staffTitle, staffEmail,nrc,staffDOB,password, dateRegistered) VALUES ('$fullName','$staffNumber','$address','$title','$email','$nrc','$dob','$hashPassword','$timestamp')";
 			
 		if (RunMysqliQuery($con, $sql)) {
 			# code...
@@ -98,7 +99,7 @@ if (isset($_POST['patientSubmit'])) {
 			$_SESSION['success_message'] = "".$firstName." was successfully added";
 			header('location: addStaff.php');
 		} else {
-			$_SESSION['error_message'] = "Sorry staff not add, try again later.";
+			$_SESSION['error_message'] = "Sorry staff not add, try again later. ".mysqli_error($con);
 			header('location: addStaff.php');
 			echo "Nah";
 		}

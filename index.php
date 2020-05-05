@@ -8,8 +8,9 @@ if (isset($_POST['submit'])) {
 
 	$staffNumber = mysqli_real_escape_string($con, $_POST['username']);
 	$password = mysqli_real_escape_string($con, $_POST['password']);
+	$staffMd5 = md5($password);
 
-	$sql = "SELECT * FROM staff WHERE staffNumber = '$staffNumber' AND password = '$password'";
+	$sql = "SELECT * FROM staff WHERE staffNumber = '$staffNumber' AND password = '$staffMd5'";
 	$runQuery = mysqli_query($con, $sql);
 
 	if (mysqli_num_rows($runQuery) > 0) {
@@ -22,21 +23,30 @@ if (isset($_POST['submit'])) {
 				# code...
 				$_SESSION['co'] = $staffNumber;
 				$_SESSION['staffID'] = $rows['id'];
+				$_SESSION['stuffType'] = $staffNumber;
 				header('location: clinical-officer/');
 			}else if ($level == 'Lab Tech') {
 				# code...
 				$_SESSION['labtech'] = $staffNumber;
 				$_SESSION['staffID'] = $rows['id'];
+				$_SESSION['stuffType'] = $staffNumber;
+
 				header('location: labTech/');
 
 			}else if ($level == 'Nurse'){
 				$_SESSION['nurse'] = $rows['staffNumber'];
+				$_SESSION['stuffType'] = $rows['staffNumber'];
 				$_SESSION['staffID'] = $rows['id'];
+
+				echo $_SESSION['stuffType'];
+
 				header('location: staff/');
 
 			}else if ($level == 'Pharmacist') {
 				# code...
 				$_SESSION['pharmacist'] = $staffNumber;
+			
+				$_SESSION['stuffType'] = $staffNumber;
 				$_SESSION['staffID'] = $rows['id'];
 				header('location: pharmacy/');
 			}
